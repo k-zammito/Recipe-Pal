@@ -15,4 +15,4 @@ const MealPlan = db.define('mealplan', {
   },
 });
 
-module.exports = Product;
+module.exports = MealPlan;

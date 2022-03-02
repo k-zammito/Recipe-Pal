@@ -1,20 +1,29 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createRecipe, fetchRecipes } from '../store';
+import { createRecipe } from '../store';
+import { v4 as uuidv4 } from 'uuid';
 
 const Recipes = () => {
   const fetchedRecipes = useSelector((state) => state.fetchedRecipes);
+  const userId = useSelector((state) => state.auth.id);
+
+  const recipes = useSelector((state) =>
+    state.recipes.filter((recipe) => recipe.userId === userId)
+  );
+
   const state = useSelector((state) => state);
-  console.log('STATE FROM RECIPES ----->', state);
-  //   console.log('FROM RECIPES ----->', fetchedRecipes);
+
+  console.log('STATE FROM RECIPES ----->', recipes);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //ADD SOME LOGIC -> if recipe exists then dont add it ?
     fetchedRecipes.map((recipe) => {
       dispatch(
         createRecipe({
-          id: recipe.id, // SOLVE FOR DUP. IDS (maybe add UUID instead?)
+          userId: userId,
+          id: recipe.id,
           title: recipe.title,
           cuisine: recipe.cuisines[0] || null,
           dishType: recipe.dishTypes
@@ -24,8 +33,6 @@ const Recipes = () => {
             )
             .pop(),
           img: recipe.image,
-          // instructions: OWN MODEL?
-          // ingredients: OWN MODEL?
           readyTime: recipe.readyInMinutes,
           servings: recipe.servings,
           url: recipe.spoonacularSourceUrl,
@@ -33,6 +40,8 @@ const Recipes = () => {
           isVegetarian: recipe.vegetarian,
           isGlutenFree: recipe.glutenFree,
           isDairyFree: recipe.dairyFree,
+          // instructions: OWN MODEL?
+          // ingredients: OWN MODEL?
         })
       );
     });
@@ -41,14 +50,14 @@ const Recipes = () => {
   return (
     <div>
       <h1>Recipes</h1>
-      {fetchedRecipes.map((recipe) => {
+      {recipes.map((recipe) => {
         return (
           <div
             key={recipe.id}
             style={{ display: 'flex', flexDirection: 'column' }}
           >
             {recipe.title}
-            <img src={recipe.image} />
+            <img src={recipe.img} style={{ width: 250 }} />
           </div>
         );
       })}

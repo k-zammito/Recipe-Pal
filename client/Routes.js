@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
-import { me } from './store';
-import { fetchRecipes } from './store';
 import Recipes from './components/Recipes';
+import ShoppingList from './components/ShoppingList';
+import { me, getRecipes } from './store';
 /**
  * COMPONENT
  */
@@ -14,16 +14,27 @@ class Routes extends Component {
     this.props.loadInitialData();
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.auth.id !== this.props.auth.id) {
+  //     this.props.loadInitialData();
+  //   }
+  //   if (prevProps.orderItems.length !== this.props.orderItems.length) {
+  //     this.props.loadInitialData();
+  //   }
+  // }
+
   render() {
     const { isLoggedIn } = this.props;
+
+    console.log('PROPS', this.props);
 
     return (
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route exact path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/recipes" component={Recipes} />
-            <Redirect to="/home" />
+            <Route exact path="/shoppinglist" component={ShoppingList} />
           </Switch>
         ) : (
           <Switch>
@@ -43,9 +54,8 @@ class Routes extends Component {
  */
 const mapState = (state) => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-    // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
+    ...state,
   };
 };
 
@@ -53,9 +63,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());
-    },
-    fetchRecipes() {
-      dispatch(fetchRecipes());
+      dispatch(getRecipes());
     },
   };
 };

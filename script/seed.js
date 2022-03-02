@@ -17,35 +17,11 @@ async function seed() {
   const users = await Promise.all([
     User.create({ username: 'cody', password: '123' }),
     User.create({ username: 'moe', password: '123' }),
+    User.create({ username: 'kenny', password: '123' }),
   ]);
-
-  // const meals = await Promise.all([
-  //   Meal.create({
-  //     id: 69,
-  //     title: 'a nice recipe',
-  //     cuisine: 'thai',
-  //     dishType: 'dinner',
-  //     img: '',
-  //     instructions: 'blah blah blah mofo',
-  //     readyTime: 45,
-  //     servings: 4,
-  //     url: '',
-  //     isVegan: true,
-  //     isVegetarian: true,
-  //     isGlutenFree: false,
-  //     isDairyFree: true,
-  //   }),
-  // ]);
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-    // meals,
-  };
 }
 
 /*

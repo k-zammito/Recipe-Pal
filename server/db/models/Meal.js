@@ -1,10 +1,12 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const { STRING, TEXT, INTEGER, ARRAY, BOOLEAN } = Sequelize;
+const { STRING, TEXT, INTEGER, UUID, UUIDV4, ARRAY, BOOLEAN } = Sequelize;
 
 const Meal = db.define('meal', {
   id: {
+    // type: UUID,
+    // defaultValue: UUIDV4,
     type: INTEGER,
     primaryKey: true,
   },
@@ -19,6 +21,8 @@ const Meal = db.define('meal', {
   },
   img: {
     type: STRING,
+    defaultValue:
+      'https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/migrated_attachments/meal-918638_1280-1.webp?itok=dMJGxEC2',
   },
   instructions: {
     type: ARRAY(TEXT),

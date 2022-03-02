@@ -13,9 +13,9 @@ export const Home = () => {
 
   const state = useSelector((state) => state);
 
-  const [recipe, setRecipe] = useState({});
+  // const [recipe, setRecipe] = useState({});
 
-  console.log('state from home', state);
+  // console.log('state from home', state);
   // useEffect(() => {
   //   dispatch(fetchRecipes());
   // }, []);
@@ -40,7 +40,7 @@ export const Home = () => {
   // };
 
   const tag1 = '';
-  const tag2 = 'breakfast';
+  const tag2 = 'dinner';
 
   // const handleClick = () => {
   //   const handleFetch = () => {
