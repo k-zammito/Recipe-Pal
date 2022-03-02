@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createRecipe } from '../store';
+import { createRecipe, createIngredient } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 
 const Recipes = () => {
@@ -13,12 +13,13 @@ const Recipes = () => {
 
   const state = useSelector((state) => state);
 
-  console.log('STATE FROM RECIPES ----->', recipes);
+  //   console.log('STATE FROM RECIPES ----->', recipes);
+  console.log('FETCHED RECIPES ----->', fetchedRecipes);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //ADD SOME LOGIC -> if recipe exists then dont add it ?
+    //ADD SOME LOGIC -> if recipe exists then dont add it ???
     fetchedRecipes.map((recipe) => {
       dispatch(
         createRecipe({
@@ -40,11 +41,45 @@ const Recipes = () => {
           isVegetarian: recipe.vegetarian,
           isGlutenFree: recipe.glutenFree,
           isDairyFree: recipe.dairyFree,
-          // instructions: OWN MODEL?
           // ingredients: OWN MODEL?
+          // instructions: OWN MODEL?
         })
       );
+
+      //   fetchedRecipes.map((recipe) =>
+      //     recipe.extendedIngredients.map((ingredient) => {
+      //       dispatch(
+      //         createIngredient({
+      //           mealId: recipe.id,
+      //           id: uuidv4(),
+      //           name: ingredient.name,
+      //           amount: ingredient.amount,
+      //           unit: ingredient.unit,
+      //           aisle: ingredient.aisle,
+      //           additionalInfo: ingredient.meta[0],
+      //         })
+      //       );
+      //     })
+      //   );
     });
+  }, [fetchedRecipes]);
+
+  useEffect(() => {
+    fetchedRecipes.map((recipe) =>
+      recipe.extendedIngredients.map((ingredient) => {
+        dispatch(
+          createIngredient({
+            mealId: recipe.id,
+            id: uuidv4(),
+            name: ingredient.name,
+            amount: ingredient.amount,
+            unit: ingredient.unit,
+            aisle: ingredient.aisle,
+            additionalInfo: ingredient.meta[0],
+          })
+        );
+      })
+    );
   }, [fetchedRecipes]);
 
   return (

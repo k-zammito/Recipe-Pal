@@ -1,38 +1,36 @@
 const router = require('express').Router();
 const {
-  models: { Meal, Ingredient },
+  models: { Ingredient },
 } = require('../db');
 module.exports = router;
 
-// GET ALL MEALS
+// GET ALL INGREDIENTS
 router.get('/', async (req, res, next) => {
   try {
-    const meals = await Meal.findAll({
-      include: [Ingredient],
-    });
-    res.json(meals);
+    const ingredients = await Ingredient.findAll({});
+    res.json(ingredients);
   } catch (err) {
     next(err);
   }
 });
 
-// CREATE NEW MEAL
+// CREATE NEW Ingredient
 router.post('/', async (req, res, next) => {
   try {
-    res.status(201).send(await Meal.create(req.body));
+    res.status(201).send(await Ingredient.create(req.body));
   } catch (error) {
     next(error);
   }
 });
 
-// DELETE A MEAL
+// DELETE A Ingredient
 // router.delete('/:id', async (req, res, next) => {
 //   try {
-//     const meal = await Meal.findByPk(req.params.id);
-//     if (!meal) {
+//     const Ingredient = await Ingredient.findByPk(req.params.id);
+//     if (!Ingredient) {
 //       res.sendStatus(404);
 //     } else {
-//       await meal.destroy();
+//       await Ingredient.destroy();
 //       res.sendStatus(204);
 //     }
 //   } catch (error) {
@@ -40,11 +38,11 @@ router.post('/', async (req, res, next) => {
 //   }
 // });
 
-// UPDATE A MEAL
+// UPDATE A Ingredient
 // router.put('/:id', async (req, res, next) => {
 //   try {
-//     const meal = await Meal.findByPk(req.params.id);
-//     res.send(await meal.update(req.body));
+//     const Ingredient = await Ingredient.findByPk(req.params.id);
+//     res.send(await Ingredient.update(req.body));
 //   } catch (error) {
 //     next(error);
 //   }

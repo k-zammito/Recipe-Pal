@@ -1,17 +1,30 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const { INTEGER, UUID, UUIDV4 } = Sequelize;
+const { INTEGER, STRING, DECIMAL, UUID, UUIDV4 } = Sequelize;
 
-const OrderItem = db.define('orderitem', {
+const Ingredient = db.define('ingredient', {
   id: {
-    type: INTEGER,
+    type: UUID,
+    defaultValue: UUIDV4,
     primaryKey: true,
   },
-  quantity: {
-    type: INTEGER,
-    defaultValue: 1,
+  name: {
+    type: STRING,
+  },
+  amount: {
+    type: DECIMAL,
+    defaultValue: 0,
+  },
+  unit: {
+    type: STRING,
+  },
+  aisle: {
+    type: STRING,
+  },
+  additionalInfo: {
+    type: STRING,
   },
 });
 
-module.exports = OrderItem;
+module.exports = Ingredient;

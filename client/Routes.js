@@ -5,7 +5,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import Recipes from './components/Recipes';
 import ShoppingList from './components/ShoppingList';
-import { me, getRecipes } from './store';
+import { me, getRecipes, getIngredients } from './store';
 /**
  * COMPONENT
  */
@@ -64,6 +64,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me());
       dispatch(getRecipes());
+      dispatch(getIngredients());
     },
   };
 };

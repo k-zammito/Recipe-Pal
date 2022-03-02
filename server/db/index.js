@@ -4,14 +4,15 @@ const db = require('./db');
 
 const User = require('./models/User');
 const Meal = require('./models/Meal');
-const MealPlan = require('./models/MealPlan');
+const Ingredient = require('./models/Ingredient');
+// const MealPlan = require('./models/MealPlan');
 
 //associations:
 
 User.hasMany(Meal);
 Meal.belongsTo(User);
-// Ingredient.belongsTo(Meal);
-// Meal.hasMany(Ingredient);
+Ingredient.belongsTo(Meal, { constraints: false });
+Meal.hasMany(Ingredient, { constraints: false });
 
 // MealPlan.belongsTo(User);
 // Meal.belongsTo(MealPlan);
@@ -27,5 +28,6 @@ module.exports = {
   models: {
     User,
     Meal,
+    Ingredient,
   },
 };
