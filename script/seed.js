@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Meal },
+  models: { User, Meal, MealPlan },
 } = require('../server/db');
 
 /**
@@ -19,6 +19,8 @@ async function seed() {
     User.create({ username: 'moe', password: '123' }),
     User.create({ username: 'kenny', password: '123' }),
   ]);
+
+  users.forEach((user) => MealPlan.create({ userId: user.id }));
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);

@@ -5,7 +5,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import Recipes from './components/Recipes';
 import ShoppingList from './components/ShoppingList';
-import { me, getRecipes, getIngredients } from './store';
+import { me, getRecipes, getIngredients, getMealPlans } from './store';
 /**
  * COMPONENT
  */
@@ -26,7 +26,7 @@ class Routes extends Component {
   render() {
     const { isLoggedIn } = this.props;
 
-    console.log('PROPS', this.props);
+    // console.log('PROPS', this.props);
 
     return (
       <div>
@@ -41,7 +41,6 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Redirect to="/" />
           </Switch>
         )}
       </div>
@@ -65,6 +64,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me());
       dispatch(getRecipes());
       dispatch(getIngredients());
+      dispatch(getMealPlans());
     },
   };
 };

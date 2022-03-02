@@ -6,21 +6,18 @@ import auth from './auth';
 import { recipes } from './recipes';
 import { fetchedRecipes } from './fetchRecipes';
 import { ingredients } from './ingredients';
-import { promiseMiddleware } from './promiseMiddleware';
+import { mealPlans } from './mealPlans';
 
 const reducer = combineReducers({
   auth,
   recipes,
   fetchedRecipes,
   ingredients,
+  mealPlans,
 });
 
 const middleware = composeWithDevTools(
-  applyMiddleware(
-    thunkMiddleware,
-    promiseMiddleware,
-    createLogger({ collapsed: true })
-  )
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
 
 const store = createStore(reducer, middleware);
@@ -30,3 +27,4 @@ export * from './auth';
 export * from './recipes';
 export * from './fetchRecipes';
 export * from './ingredients';
+export * from './mealPlans';
