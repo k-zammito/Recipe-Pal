@@ -2,17 +2,35 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const ShoppingList = () => {
-  const userId = useSelector((state) => state.auth.id);
-  const recipes = useSelector((state) =>
-    state.recipes.filter((recipe) => recipe.userId === userId)
+  const userId = useSelector((state) => state.auth.id) || '';
+  const currMealPlan = useSelector(
+    (state) =>
+      state.mealPlans.find((mealPlan) => mealPlan.userId === userId) || {}
   );
-  const ingredients = useSelector((state) => state.ingredients); // USE MEALPLAN ID for this -> indredients belong to mealplan
 
-  console.log(recipes);
+  const userMeals = useSelector((state) =>
+    state.recipes.filter((meal) => meal.mealplanId === currMealPlan.id)
+  );
+
+  const ingredients = useSelector((state) =>
+    state.ingredients.filter((ing) => ing.mealplanId === currMealPlan.id)
+  );
+
+  // console.log('ING', ingredients);
+  console.log('USER MEALS', userMeals);
 
   return (
     <div>
-      <h1>ShoppingList</h1>
+      <h2>Shopping List</h2>
+      {ingredients.sort().map((ing) => {
+        return (
+          <div key={ing.id}>
+            <span>{ing.amount}</span> <span>{ing.unit}</span>
+            {' - '}
+            <span style={{ fontWeight: 600 }}>{ing.name}</span>
+          </div>
+        );
+      })}
     </div>
   );
 };

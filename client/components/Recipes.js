@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createRecipe, createIngredient } from '../store';
+import { createRecipe, createIngredient, deleteRecipe } from '../store';
 import { v4 as uuidv4 } from 'uuid';
+import _ from 'lodash';
 
 const Recipes = () => {
   const fetchedRecipes = useSelector((state) => state.fetchedRecipes);
-  const userId = useSelector((state) => state.auth.id);
+  const userId = useSelector((state) => state.auth.id) || '';
   const currMealPlan = useSelector(
     (state) =>
       state.mealPlans.find((mealPlan) => mealPlan.userId === userId) || {}
@@ -16,66 +17,69 @@ const Recipes = () => {
   );
 
   const state = useSelector((state) => state);
-  console.log('STATE', state);
-
-  console.log('CURR USER ID', userId);
-  console.log('CURR MEAL PLAN', currMealPlan);
-  //   console.log('STATE FROM RECIPES ----->', recipes);
-  //   console.log('FETCHED RECIPES ----->', fetchedRecipes);
 
   const dispatch = useDispatch();
 
+  const latestRecipe = recipes[recipes.length - 1];
+
+  //   console.log('STATE', state);
+
+  //   console.log('latest element', latestRecipe);
+  //   console.log(fetchedRecipes);
   // ADD RECIPES TO DB
 
   useEffect(() => {
-    // NEED TO UPDATE CURRENT MEALPLAN PER USER WITH THE NEW RECIPES / INGREDIENTS
-
-    //ADD SOME LOGIC -> if recipe exists then dont add it ???
     fetchedRecipes.map((recipe) => {
-      dispatch(
-        createRecipe({
-          userId: userId,
-          mealplanId: currMealPlan.id,
-          id: recipe.id,
-          title: recipe.title,
-          cuisine: recipe.cuisines[0] || null,
-          dishType: recipe.dishTypes
-            .filter(
-              (type) =>
-                type === 'breakfast' || type === 'lunch' || type === 'dinner'
-            )
-            .pop(),
-          img: recipe.image,
-          readyTime: recipe.readyInMinutes,
-          servings: recipe.servings,
-          url: recipe.spoonacularSourceUrl,
-          isVegan: recipe.vegan,
-          isVegetarian: recipe.vegetarian,
-          isGlutenFree: recipe.glutenFree,
-          isDairyFree: recipe.dairyFree,
-          // instructions: OWN MODEL?
-        })
-      );
+      latestRecipe && latestRecipe.title === recipe.title
+        ? ''
+        : dispatch(
+            createRecipe({
+              userId: userId,
+              mealplanId: currMealPlan.id,
+              id: recipe.id,
+              title: recipe.title,
+              cuisine: recipe.cuisines[0] || null,
+              dishType: recipe.dishTypes
+                .filter(
+                  (type) =>
+                    type === 'breakfast' ||
+                    type === 'lunch' ||
+                    type === 'dinner'
+                )
+                .pop(),
+              img: recipe.image,
+              readyTime: recipe.readyInMinutes,
+              servings: recipe.servings,
+              url: recipe.sourceUrl,
+              isVegan: recipe.vegan,
+              isVegetarian: recipe.vegetarian,
+              isGlutenFree: recipe.glutenFree,
+              isDairyFree: recipe.dairyFree,
+              // instructions: OWN MODEL?
+            })
+          );
     });
   }, [fetchedRecipes]);
 
   // ADD FETCHED INGREDIENTS TO DB
   useEffect(() => {
     fetchedRecipes.map((recipe) =>
-      recipe.extendedIngredients.map((ingredient) => {
-        dispatch(
-          createIngredient({
-            mealplanId: currMealPlan.id,
-            mealId: recipe.id,
-            id: uuidv4(),
-            name: ingredient.name,
-            amount: ingredient.amount,
-            unit: ingredient.unit,
-            aisle: ingredient.aisle,
-            additionalInfo: ingredient.meta[0],
+      latestRecipe && latestRecipe.title === recipe.title
+        ? ''
+        : recipe.extendedIngredients.map((ingredient) => {
+            dispatch(
+              createIngredient({
+                mealplanId: currMealPlan.id,
+                mealId: recipe.id,
+                id: uuidv4(),
+                name: ingredient.name,
+                amount: ingredient.amount,
+                unit: ingredient.unit,
+                aisle: ingredient.aisle,
+                additionalInfo: ingredient.meta[0],
+              })
+            );
           })
-        );
-      })
     );
   }, [fetchedRecipes]);
 
@@ -92,8 +96,16 @@ const Recipes = () => {
                 key={recipe.id}
                 style={{ display: 'flex', flexDirection: 'column' }}
               >
-                {recipe.title}
-                <img src={recipe.img} style={{ width: 250 }} />
+                {recipe.title} - Serves: {recipe.servings}
+                <a href={recipe.url} target="_blank">
+                  <img src={recipe.img} style={{ width: 250 }} />
+                </a>
+                {/* <button
+                  onClick={() => dispatch(deleteRecipe(recipe.id))}
+                  style={{ width: 250 }}
+                >
+                  delete
+                </button> */}
               </div>
             );
           })}

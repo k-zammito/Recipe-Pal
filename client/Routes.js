@@ -14,19 +14,20 @@ class Routes extends Component {
     this.props.loadInitialData();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.auth.id !== this.props.auth.id) {
-  //     this.props.loadInitialData();
-  //   }
-  //   if (prevProps.orderItems.length !== this.props.orderItems.length) {
-  //     this.props.loadInitialData();
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    // if (prevProps !== this.props) {
+    //   this.props.loadInitialData();
+    // }
+    // if (prevProps.orderItems.length !== this.props.orderItems.length) {
+    //   this.props.loadInitialData();
+    // }
+    // console.log('PREV', prevProps);
+  }
 
   render() {
     const { isLoggedIn } = this.props;
 
-    // console.log('PROPS', this.props);
+    // console.log('PROPS', this.props);ç
 
     return (
       <div>
@@ -35,10 +36,11 @@ class Routes extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/recipes" component={Recipes} />
             <Route exact path="/shoppinglist" component={ShoppingList} />
+            <Redirect to="/" />
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route exact path="/" component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
           </Switch>

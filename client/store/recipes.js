@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const GET_RECIPES = 'GET_RECIPES';
 const CREATE_RECIPE = 'CREATE_RECIPE';
+const DELETE_RECIPE = 'DELETE_RECIPE';
 
 /**
  * ACTION CREATORS
@@ -25,6 +26,12 @@ const _createRecipe = (recipe) => {
   };
 };
 
+const _deleteRecipe = (id) => {
+  return {
+    type: DELETE_RECIPE,
+    id,
+  };
+};
 /**
  * THUNK CREATORS
  */
@@ -43,6 +50,13 @@ export const createRecipe = (recipe) => {
   };
 };
 
+export const deleteRecipe = (id) => {
+  return async (dispatch) => {
+    await axios.delete(`/api/meals/${id}`);
+    dispatch(_deleteRecipe(id));
+  };
+};
+
 /**
  * REDUCER
  */
@@ -53,6 +67,8 @@ export const recipes = (state = [], action) => {
       return action.recipes;
     case CREATE_RECIPE:
       return [...state, action.recipe];
+    case DELETE_RECIPE:
+      return state.filter((recipe) => recipe.id !== action.id);
     default:
       return state;
   }

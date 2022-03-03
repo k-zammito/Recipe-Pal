@@ -26,19 +26,19 @@ router.post('/', async (req, res, next) => {
 });
 
 // DELETE A MEAL
-// router.delete('/:id', async (req, res, next) => {
-//   try {
-//     const meal = await Meal.findByPk(req.params.id);
-//     if (!meal) {
-//       res.sendStatus(404);
-//     } else {
-//       await meal.destroy();
-//       res.sendStatus(204);
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const meal = await Meal.findByPk(req.params.id);
+    if (!meal) {
+      res.sendStatus(404);
+    } else {
+      await meal.destroy();
+      res.sendStatus(204);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
 // UPDATE A MEAL
 // router.put('/:id', async (req, res, next) => {

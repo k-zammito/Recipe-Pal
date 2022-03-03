@@ -18,12 +18,12 @@ const _fetchRecipes = (recipe) => {
 /**
  * THUNK CREATORS
  */
-export const fetchRecipes = (tag1, tag2) => {
+export const fetchRecipes = (tag1, tag2, amount) => {
   return async (dispatch) => {
     const options = {
       method: 'GET',
       url: 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random',
-      params: { tags: `${tag1},${tag2}`, number: '1' },
+      params: { tags: `${tag1},${tag2}`, number: `${amount}` },
       headers: {
         'x-rapidapi-host':
           'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',

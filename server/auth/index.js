@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { User },
+  models: { User, MealPlan },
 } = require('../db');
 module.exports = router;
 
@@ -18,6 +18,11 @@ router.post('/signup', async (req, res, next) => {
       username: req.body.username,
       password: req.body.password,
     });
+
+    const mealPlan = await MealPlan.create({
+      userId: user.id,
+    });
+
     res.send({ token: await user.generateToken() });
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {

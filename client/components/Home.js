@@ -10,13 +10,16 @@ export const Home = () => {
 
   const tag1 = '';
   const tag2 = 'dinner';
+  const amountOfMeals = 1;
 
   return (
     <div>
       <h1>HOME</h1>
       <h3>Welcome, {username}</h3>
       <Link to="/recipes">
-        <button onClick={() => dispatch(fetchRecipes(tag1, tag2))}>
+        <button
+          onClick={() => dispatch(fetchRecipes(tag1, tag2, amountOfMeals))}
+        >
           FETCH RECIPE!
         </button>
       </Link>
