@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createRecipe, createIngredient, deleteRecipe } from '../store';
 import { v4 as uuidv4 } from 'uuid';
+import { unitConversion } from './conversions';
 import _ from 'lodash';
 
 const Recipes = () => {
@@ -72,9 +73,9 @@ const Recipes = () => {
                 mealplanId: currMealPlan.id,
                 mealId: recipe.id,
                 id: uuidv4(),
-                name: ingredient.name,
-                amount: ingredient.amount,
-                unit: ingredient.unit,
+                name: ingredient.name.toLowerCase(),
+                amount: ingredient.amount.toFixed(1),
+                unit: unitConversion(ingredient.unit),
                 aisle: ingredient.aisle,
                 additionalInfo: ingredient.meta[0],
               })
