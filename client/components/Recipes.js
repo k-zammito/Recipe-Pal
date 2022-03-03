@@ -25,63 +25,72 @@ const Recipes = () => {
 
   //   console.log('STATE', state);
 
-  //   console.log('latest element', latestRecipe);
   //   console.log(fetchedRecipes);
-  // ADD RECIPES TO DB
 
+  // ADD RECIPES TO DB
   useEffect(() => {
-    fetchedRecipes.map((recipe) => {
-      latestRecipe && latestRecipe.title === recipe.title
-        ? ''
-        : dispatch(
-            createRecipe({
-              userId: userId,
-              mealplanId: currMealPlan.id,
-              id: recipe.id,
-              title: recipe.title,
-              cuisine: recipe.cuisines[0] || null,
-              dishType: recipe.dishTypes
-                .filter(
-                  (type) =>
-                    type === 'breakfast' ||
-                    type === 'lunch' ||
-                    type === 'dinner'
-                )
-                .pop(),
-              img: recipe.image,
-              readyTime: recipe.readyInMinutes,
-              servings: recipe.servings,
-              url: recipe.sourceUrl,
-              isVegan: recipe.vegan,
-              isVegetarian: recipe.vegetarian,
-              isGlutenFree: recipe.glutenFree,
-              isDairyFree: recipe.dairyFree,
-              // instructions: OWN MODEL?
-            })
-          );
-    });
+    async function fetchRecipes() {
+      // BUG FIX IDEA -> check if recipe in recipes state array first, if so dont fetch -> else, fetch
+
+      await fetchedRecipes.map((recipe) => {
+        latestRecipe && latestRecipe.title === recipe.title
+          ? ''
+          : dispatch(
+              createRecipe({
+                userId: userId,
+                mealplanId: currMealPlan.id,
+                id: recipe.id,
+                title: recipe.title,
+                cuisine: recipe.cuisines[0] || null,
+                dishType: recipe.dishTypes
+                  .filter(
+                    (type) =>
+                      type === 'breakfast' ||
+                      type === 'lunch' ||
+                      type === 'dinner' ||
+                      type === 'dessert'
+                  )
+                  .pop(),
+                img: recipe.image,
+                readyTime: recipe.readyInMinutes,
+                servings: recipe.servings,
+                url: recipe.sourceUrl,
+                isVegan: recipe.vegan,
+                isVegetarian: recipe.vegetarian,
+                isGlutenFree: recipe.glutenFree,
+                isDairyFree: recipe.dairyFree,
+                isHealthy: recipe.veryHealthy,
+                // instructions: OWN MODEL?
+              })
+            );
+      });
+    }
+    fetchRecipes();
   }, [fetchedRecipes]);
 
   // ADD FETCHED INGREDIENTS TO DB
   useEffect(() => {
-    fetchedRecipes.map((recipe) =>
-      latestRecipe && latestRecipe.title === recipe.title
-        ? ''
-        : recipe.extendedIngredients.map((ingredient) => {
-            dispatch(
-              createIngredient({
-                mealplanId: currMealPlan.id,
-                mealId: recipe.id,
-                id: uuidv4(),
-                name: ingredient.name.toLowerCase(),
-                amount: ingredient.amount.toFixed(1),
-                unit: unitConversion(ingredient.unit),
-                aisle: ingredient.aisle,
-                additionalInfo: ingredient.meta[0],
-              })
-            );
-          })
-    );
+    async function fetchIngredients() {
+      await fetchedRecipes.map((recipe) =>
+        latestRecipe && latestRecipe.title === recipe.title
+          ? ''
+          : recipe.extendedIngredients.map((ingredient) => {
+              dispatch(
+                createIngredient({
+                  mealplanId: currMealPlan.id,
+                  mealId: recipe.id,
+                  id: uuidv4(),
+                  name: ingredient.name.toLowerCase(),
+                  amount: ingredient.amount.toFixed(1),
+                  unit: unitConversion(ingredient.unit),
+                  aisle: ingredient.aisle,
+                  additionalInfo: ingredient.meta[0],
+                })
+              );
+            })
+      );
+    }
+    fetchIngredients();
   }, [fetchedRecipes]);
 
   return (
@@ -98,7 +107,7 @@ const Recipes = () => {
                 style={{ display: 'flex', flexDirection: 'column' }}
               >
                 {recipe.title} - Serves: {recipe.servings}
-                <a href={recipe.url} target="_blank">
+                <a href={recipe.url} target="_blank" style={{ width: 250 }}>
                   <img src={recipe.img} style={{ width: 250 }} />
                 </a>
                 {/* <button

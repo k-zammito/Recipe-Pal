@@ -29,5 +29,9 @@ export const unitConversion = (unit) => {
     unit === 'cup';
   }
 
+  if (unit === 'table salt') {
+    unit === 'salt';
+  }
+
   return unit;
 };

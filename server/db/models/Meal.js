@@ -48,6 +48,9 @@ const Meal = db.define('meal', {
   isDairyFree: {
     type: BOOLEAN,
   },
+  isHealthy: {
+    type: BOOLEAN,
+  },
 });
 
 module.exports = Meal;
