@@ -35,7 +35,13 @@ export default function MealPlanForm() {
   };
 
   const mealTypes = ['Breakfast', 'Lunch', 'Dinner', 'Dessert'];
-  const dietTypes = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Dairy-Free'];
+  const dietTypes = [
+    'No Preference',
+    'Vegetarian',
+    'Vegan',
+    'Gluten-Free',
+    'Dairy-Free',
+  ];
   const numOfMeals = [1, 2, 3];
 
   const dispatch = useDispatch();
@@ -115,7 +121,7 @@ export default function MealPlanForm() {
               dispatch(
                 fetchRecipes(
                   values.mealType,
-                  values.dietType,
+                  values.dietType === 'no preference' ? null : values.dietType,
                   Number(values.numOfMeals)
                 )
               )
