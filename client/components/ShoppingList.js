@@ -19,18 +19,51 @@ const ShoppingList = () => {
   // console.log('ING', ingredients);
   // console.log('USER MEALS', userMeals);
 
+  const aisles = ingredients.map((ing) => ing.aisle);
+  const uniqueAisles = [...new Set(aisles)];
+
+  const ingNames = ingredients.map((ing) => ing.name);
+
+  const uniqueIngNames = [...new Set(ingNames)];
+
+  console.log(uniqueAisles);
+
+  // console.log('ING NAMES', ingNames);
+  // console.log('UNIQUE ING NAMES', uniqueIngNames);
+
   return (
     <div>
       <h3>Shopping List: ({ingredients.length} items)</h3>
-      {ingredients.map((ing) => {
+      {uniqueAisles.sort().map((aisle) => {
         return (
-          <div key={ing.id}>
-            <span>{ing.amount}</span> <span>{ing.unit}</span>
-            {' - '}
-            <span style={{ fontWeight: 600 }}>{ing.name}</span>
+          <div>
+            <h5>Aisle: {aisle === null ? 'Other' : aisle} </h5>
+            {ingredients.map((ing) =>
+              ing.aisle === aisle ? (
+                <div key={ing.id}>
+                  - <span>{ing.amount}</span> <span>{ing.unit}</span>
+                  {' - '}
+                  <span style={{ fontWeight: 600 }}>{ing.name}</span>
+                </div>
+              ) : (
+                ''
+              )
+            )}
           </div>
         );
       })}
+
+      {/* {ingredients.map((ing) => {
+        return (
+          <div key={ing.id}>
+            <div>
+              <span>{ing.amount}</span> <span>{ing.unit}</span>
+              {' - '}
+              <span style={{ fontWeight: 600 }}>{ing.name}</span>
+            </div>
+          </div>
+        );
+      })} */}
     </div>
   );
 };

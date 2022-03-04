@@ -1,4 +1,5 @@
 //this is the access point for all things database related!
+require('dotenv').config();
 
 const db = require('./db');
 
