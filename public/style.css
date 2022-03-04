@@ -1,5 +1,11 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap'); */
+
 body {
-  font-family: sans-serif;
+  font-family: 'Ariel', sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 a {
@@ -19,7 +25,34 @@ form div {
   margin: 1em;
   display: inline-block;
 }
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.navbar {
+  /* position: fixed; */
+  /* overflow: hidden; */
+  top: 0;
+  background: white;
+  /* z-index: 5; */
+  width: 100%;
+  color: black;
+  align-items: center;
+}
+
+.navbar-wrap {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  align-items: center;
+}
+
+.navbar-img {
+  height: auto;
+}
+
+.navbar-logo {
+  height: 60px;
+  padding: 10px;
+}
+/* --------------- input form ccs ------------------ */
 
 .form-container {
   width: 360px;
@@ -66,11 +99,84 @@ input {
 }
 
 button {
-  background: #4caf50;
-  color: white;
+  /* background: #4caf50; */
+  /* color: white; */
   cursor: pointer;
 }
 
 button:disabled {
   cursor: default;
+}
+
+/* ------------ modal css ------------- */
+
+.modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  width: 500px;
+  height: 500px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.modalContainer .title {
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modalContainer .body {
+  flex: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.modalContainer .footer {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer .footer button {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  background-color: crimson;
 }

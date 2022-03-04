@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchRecipes } from '../store/fetchRecipes';
 import { Link } from 'react-router-dom';
+// import Stack from '@mui/material/Stack';
+// import Button from '@mui/material/Button';
+// import Box from '@mui/material/Box';
+// import TextField from '@mui/material/TextField';
 
 export default function MealPlanForm() {
   const [values, setValues] = useState({
@@ -46,10 +50,9 @@ export default function MealPlanForm() {
 
   const dispatch = useDispatch();
 
-  console.log('VALUES', values);
-
   return (
     <div className="form-container">
+      {/* <Box> */}
       <form className="register-form" onSubmit={handleSubmit}>
         {submitted && valid ? (
           <div className="success-message">
@@ -131,6 +134,7 @@ export default function MealPlanForm() {
           </button>
         </Link>
       </form>
+      {/* </Box> */}
     </div>
   );
 }

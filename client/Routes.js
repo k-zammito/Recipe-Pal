@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Recipes from './components/Recipes';
 import ShoppingList from './components/ShoppingList';
 import { me, getRecipes, getIngredients, getMealPlans } from './store';
+import Video from './components/Video';
 /**
  * COMPONENT
  */

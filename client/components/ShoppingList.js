@@ -17,7 +17,7 @@ const ShoppingList = () => {
   );
 
   // console.log('ING', ingredients);
-  console.log('USER MEALS', userMeals);
+  // console.log('USER MEALS', userMeals);
 
   return (
     <div>

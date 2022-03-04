@@ -23,6 +23,8 @@ const Recipes = () => {
 
   const latestRecipe = recipes[recipes.length - 1];
 
+  // console.log('REC', recipes);
+
   //   console.log('STATE', state);
 
   //   console.log(fetchedRecipes);
@@ -65,11 +67,6 @@ const Recipes = () => {
             );
       });
     }
-    fetchRecipes();
-  }, [fetchedRecipes]);
-
-  // ADD FETCHED INGREDIENTS TO DB
-  useEffect(() => {
     async function fetchIngredients() {
       await fetchedRecipes.map((recipe) =>
         latestRecipe && latestRecipe.title === recipe.title
@@ -90,7 +87,33 @@ const Recipes = () => {
             })
       );
     }
+    fetchRecipes();
     fetchIngredients();
+  }, [fetchedRecipes]);
+
+  // ADD FETCHED INGREDIENTS TO DB
+  useEffect(() => {
+    // async function fetchIngredients() {
+    //   await fetchedRecipes.map((recipe) =>
+    //     latestRecipe && latestRecipe.title === recipe.title
+    //       ? ''
+    //       : recipe.extendedIngredients.map((ingredient) => {
+    //           dispatch(
+    //             createIngredient({
+    //               mealplanId: currMealPlan.id,
+    //               mealId: recipe.id,
+    //               id: uuidv4(),
+    //               name: ingredient.name.toLowerCase(),
+    //               amount: ingredient.amount.toFixed(1),
+    //               unit: unitConversion(ingredient.unit),
+    //               aisle: ingredient.aisle,
+    //               additionalInfo: ingredient.meta[0],
+    //             })
+    //           );
+    //         })
+    //   );
+    // }
+    // fetchIngredients();
   }, [fetchedRecipes]);
 
   return (
