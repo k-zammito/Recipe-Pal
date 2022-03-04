@@ -21,8 +21,8 @@ const ShoppingList = () => {
 
   return (
     <div>
-      <h2>Shopping List</h2>
-      {ingredients.sort().map((ing) => {
+      <h3>Shopping List: ({ingredients.length} items)</h3>
+      {ingredients.map((ing) => {
         return (
           <div key={ing.id}>
             <span>{ing.amount}</span> <span>{ing.unit}</span>

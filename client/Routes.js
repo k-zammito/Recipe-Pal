@@ -16,19 +16,13 @@ class Routes extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // if (prevProps !== this.props) {
-    //   this.props.loadInitialData();
-    // }
-    // if (prevProps.orderItems.length !== this.props.orderItems.length) {
-    //   this.props.loadInitialData();
-    // }
-    // console.log('PREV', prevProps);
+    if (prevProps.recipes.length !== this.props.recipes.length) {
+      this.props.loadInitialData();
+    }
   }
 
   render() {
     const { isLoggedIn } = this.props;
-
-    // console.log('PROPS', this.props);ç
 
     return (
       <div>

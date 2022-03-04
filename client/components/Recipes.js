@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createRecipe, createIngredient, deleteRecipe } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 import { unitConversion } from './conversions';
-import _ from 'lodash';
 
 const Recipes = () => {
   const fetchedRecipes = useSelector((state) => state.fetchedRecipes);
@@ -17,25 +16,29 @@ const Recipes = () => {
     state.recipes.filter((recipe) => recipe.userId === userId)
   );
 
+  const ingredients = useSelector((state) =>
+    state.ingredients.filter((ing) => ing.mealplanId === currMealPlan.id)
+  );
   const state = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
-  const latestRecipe = recipes[recipes.length - 1];
+  const recipeTitles = recipes.map((recipe) => recipe.title);
 
-  // console.log('REC', recipes);
+  console.log('REC', recipes);
 
   //   console.log('STATE', state);
 
   //   console.log(fetchedRecipes);
 
+  // console.log('TITLES', recipeTitles);
+  console.log('ING', ingredients);
+
   // ADD RECIPES TO DB
   useEffect(() => {
     async function fetchRecipes() {
-      // BUG FIX IDEA -> check if recipe in recipes state array first, if so dont fetch -> else, fetch
-
       await fetchedRecipes.map((recipe) => {
-        latestRecipe && latestRecipe.title === recipe.title
+        recipeTitles.includes(recipe.title)
           ? ''
           : dispatch(
               createRecipe({
@@ -69,7 +72,7 @@ const Recipes = () => {
     }
     async function fetchIngredients() {
       await fetchedRecipes.map((recipe) =>
-        latestRecipe && latestRecipe.title === recipe.title
+        recipeTitles.includes(recipe.title)
           ? ''
           : recipe.extendedIngredients.map((ingredient) => {
               dispatch(
@@ -89,31 +92,6 @@ const Recipes = () => {
     }
     fetchRecipes();
     fetchIngredients();
-  }, [fetchedRecipes]);
-
-  // ADD FETCHED INGREDIENTS TO DB
-  useEffect(() => {
-    // async function fetchIngredients() {
-    //   await fetchedRecipes.map((recipe) =>
-    //     latestRecipe && latestRecipe.title === recipe.title
-    //       ? ''
-    //       : recipe.extendedIngredients.map((ingredient) => {
-    //           dispatch(
-    //             createIngredient({
-    //               mealplanId: currMealPlan.id,
-    //               mealId: recipe.id,
-    //               id: uuidv4(),
-    //               name: ingredient.name.toLowerCase(),
-    //               amount: ingredient.amount.toFixed(1),
-    //               unit: unitConversion(ingredient.unit),
-    //               aisle: ingredient.aisle,
-    //               additionalInfo: ingredient.meta[0],
-    //             })
-    //           );
-    //         })
-    //   );
-    // }
-    // fetchIngredients();
   }, [fetchedRecipes]);
 
   return (
