@@ -5,7 +5,12 @@ export const unitConversion = (unit) => {
 
   unit = unit.toLowerCase();
 
-  if (unit === 'tablespoon' || unit === 'tablespoons' || unit === 'tb') {
+  if (
+    unit === 'tablespoon' ||
+    unit === 'tablespoons' ||
+    unit === 'tb' ||
+    unit === 'tbs'
+  ) {
     unit = 'tbsp';
   } else if (unit === 't' || unit === 'teaspoon' || unit === 'teaspoons') {
     unit = 'tsp';
@@ -16,9 +21,11 @@ export const unitConversion = (unit) => {
   } else if (unit === 'grams' || unit === 'gram') {
     unit = 'g';
   } else if (unit === 'c') {
-    unit === 'cup';
+    unit = 'cup';
   } else if (unit === 'table salt') {
-    unit === 'salt';
+    unit = 'salt';
+  } else if (unit === '') {
+    unit = 'medium';
   }
 
   return unit;
