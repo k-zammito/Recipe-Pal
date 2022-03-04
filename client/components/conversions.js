@@ -7,29 +7,17 @@ export const unitConversion = (unit) => {
 
   if (unit === 'tablespoon' || unit === 'tablespoons' || unit === 'tb') {
     unit = 'tbsp';
-  }
-
-  if (unit === 't' || unit === 'teaspoon' || unit === 'teaspoons') {
+  } else if (unit === 't' || unit === 'teaspoon' || unit === 'teaspoons') {
     unit = 'tsp';
-  }
-
-  if (unit === 'ounces' || unit === 'ounce') {
+  } else if (unit === 'ounces' || unit === 'ounce') {
     unit = 'oz';
-  }
-
-  if (unit === 'pounds' || unit === 'pound') {
+  } else if (unit === 'pounds' || unit === 'pound') {
     unit = 'lbs';
-  }
-
-  if (unit === 'grams' || unit === 'gram') {
+  } else if (unit === 'grams' || unit === 'gram') {
     unit = 'g';
-  }
-
-  if (unit === 'c') {
+  } else if (unit === 'c') {
     unit === 'cup';
-  }
-
-  if (unit === 'table salt') {
+  } else if (unit === 'table salt') {
     unit === 'salt';
   }
 

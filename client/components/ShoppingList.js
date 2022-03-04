@@ -26,17 +26,29 @@ const ShoppingList = () => {
 
   const uniqueIngNames = [...new Set(ingNames)];
 
-  console.log(uniqueAisles);
-
+  // console.log(uniqueAisles);
   // console.log('ING NAMES', ingNames);
   // console.log('UNIQUE ING NAMES', uniqueIngNames);
+
+  const ingReduce = ingredients.reduce((acc, ing) => {
+    if (acc[ing.name] && acc[ing.name][1] === ing.unit) {
+      acc[ing.name][0] += ing.amount * 1;
+    } else if (acc[ing.name]) {
+      acc[ing.name].push(...[ing.amount * 1, ing.unit]);
+    } else {
+      acc[ing.name] = [ing.amount * 1, ing.unit];
+    }
+    return acc;
+  }, {});
+
+  console.log('ing reduce', ingReduce);
 
   return (
     <div>
       <h3>Shopping List: ({ingredients.length} items)</h3>
-      {uniqueAisles.sort().map((aisle) => {
+      {uniqueAisles.sort().map((aisle, idx) => {
         return (
-          <div>
+          <div key={idx}>
             <h5>Aisle: {aisle === null ? 'Other' : aisle} </h5>
             {ingredients.map((ing) =>
               ing.aisle === aisle ? (
