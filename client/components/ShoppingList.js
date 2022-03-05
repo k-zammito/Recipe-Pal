@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ListHeader from './ListHeader';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -25,8 +25,8 @@ const ShoppingList = () => {
 
   const ingNames = ingredients.map((ing) => ing.name);
   const uniqueIngNames = [...new Set(ingNames)];
-  // console.log('UNIQUE INGREDIENTS', uniqueIngNames);
-  // console.log('INGREDIENTS', ingredients);
+  console.log('UNIQUE INGREDIENTS', uniqueIngNames);
+  console.log('ALL INGREDIENTS', ingredients);
 
   // console.log(uniqueAisles);
   // console.log('ING NAMES', ingNames);
@@ -58,6 +58,18 @@ const ShoppingList = () => {
   const ingEnt = Object.entries(ingReduce);
   // console.log('entries', ingEnt);
 
+  const toggleLineThru = (boolen) => {
+    if (boolen) {
+      return 'line-through';
+    }
+
+    if (boolen === false) {
+      return '';
+    }
+  };
+
+  const [lineThru, setLineThrough] = useState(false);
+
   return (
     <div className="list-container">
       <div className="list-wrapper">
@@ -67,8 +79,11 @@ const ShoppingList = () => {
         <div>
           {ingEnt.sort().map((ingred, idx) => (
             <li key={idx} className="list-item">
-              <span className="list-item-text">{`${ingred[0]} `}</span>
-              <span className="list-item-text">
+              <span
+                className="list-item-text"
+                style={{ textDecoration: toggleLineThru(lineThru) }}
+              >
+                {`${ingred[0]} `}
                 {ingred.slice(1).map((ing, idx, array) => (
                   <span key={idx} className="list-item-text">{`(${ing.join(
                     ' '
@@ -76,9 +91,10 @@ const ShoppingList = () => {
                 ))}
               </span>
               <div>
-                {/* <button className="">
-
-                </button> */}
+                <CheckCircleIcon
+                  className="button-complete task-button"
+                  onClick={() => setLineThrough(!lineThru)}
+                />
               </div>
             </li>
           ))}
