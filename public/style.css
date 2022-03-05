@@ -10,6 +10,9 @@ body {
 
 a {
   text-decoration: none;
+  color: white;
+  text-align: center;
+  align-items: center;
 }
 
 a:visited {
@@ -27,12 +30,15 @@ label {
 
 nav {
   color: white;
+  text-align: center;
+  align-items: center;
 }
 
 nav a {
   display: inline-block;
   margin: 1em;
   text-decoration: none;
+  align-items: center;
 }
 
 form div {
@@ -50,6 +56,15 @@ form div {
   width: 100%;
   color: black;
   align-items: center;
+  text-align: center;
+}
+
+.nav-logout {
+  margin-top: 5px;
+}
+
+.nav-icon {
+  align-items: center;
 }
 
 .navbar-wrap {
@@ -61,11 +76,17 @@ form div {
 
 .navbar-img {
   height: auto;
+  align-items: center;
+}
+
+.nav-links {
+  align-items: center;
 }
 
 .navbar-logo {
   height: 55px;
   padding: 10px;
+  align-items: center;
 }
 
 .home {
@@ -92,12 +113,10 @@ form div {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
   padding: 10px;
 }
 
 .register-form button {
-  margin-left: 46px;
   margin-top: 15px;
 }
 

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 // import { Link } from 'react-router-dom';
 import Logo from '../../public/RECIPE PAL-logos_white.png';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const Navbar = ({ handleClick, isLoggedIn, userName }) => (
   <div className="navbar">
@@ -15,12 +16,15 @@ const Navbar = ({ handleClick, isLoggedIn, userName }) => (
       </div>
       <nav>
         {isLoggedIn ? (
-          <div>
-            <span style={{ marginRight: 20 }}>Welcome, {userName}</span>
+          <div className="nav-links">
+            <span style={{ marginRight: 25, fontStyle: 'italic' }}>
+              Welcome, {userName}
+            </span>
             <Link to="/">Home</Link>
             <Link to="/recipes">My Recipes</Link>
             <Link to="/shoppinglist">Shopping List</Link>
-            <a href="#" onClick={handleClick}>
+            <a href="#" onClick={handleClick} className="nav-logout">
+              {/* <ExitToAppIcon className="nav-icon" /> */}
               Logout
             </a>
           </div>
