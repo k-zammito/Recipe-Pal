@@ -5,7 +5,13 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import Recipes from './components/Recipes';
 import ShoppingList from './components/ShoppingList';
-import { me, getRecipes, getIngredients, getMealPlans } from './store';
+import {
+  me,
+  getRecipes,
+  getIngredients,
+  getMealPlans,
+  getUsers,
+} from './store';
 
 /**
  * COMPONENT
@@ -16,6 +22,10 @@ class Routes extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (prevProps.auth.id !== this.props.auth.id) {
+      this.props.loadInitialData();
+    }
+
     if (prevProps.recipes.length !== this.props.recipes.length) {
       this.props.loadInitialData();
     }
@@ -23,6 +33,9 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
+
+    console.log('props', this.props.users);
+    console.log('meal plans', this.props.mealPlans);
 
     return (
       <div>
@@ -63,6 +76,7 @@ const mapDispatch = (dispatch) => {
       dispatch(getRecipes());
       dispatch(getIngredients());
       dispatch(getMealPlans());
+      dispatch(getUsers());
     },
   };
 };

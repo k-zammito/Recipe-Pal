@@ -19,7 +19,7 @@ router.post('/signup', async (req, res, next) => {
       password: req.body.password,
     });
 
-    const mealPlan = await MealPlan.create({
+    await MealPlan.create({
       userId: user.id,
     });
 

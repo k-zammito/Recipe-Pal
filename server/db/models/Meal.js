@@ -21,8 +21,8 @@ const Meal = db.define('meal', {
   },
   img: {
     type: STRING,
-    defaultValue:
-      'https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/migrated_attachments/meal-918638_1280-1.webp?itok=dMJGxEC2',
+    // defaultValue:
+    //   'https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/migrated_attachments/meal-918638_1280-1.webp?itok=dMJGxEC2',
   },
   instructions: {
     type: ARRAY(TEXT),

@@ -36,6 +36,9 @@ const Recipes = () => {
 
   const recipeTitles = recipes.map((recipe) => recipe.title);
 
+  const defaultPhoto =
+    'https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/migrated_attachments/meal-918638_1280-1.webp?itok=dMJGxEC2';
+
   // console.log('REC', recipes);
 
   //   console.log('STATE', state);
@@ -67,7 +70,7 @@ const Recipes = () => {
                       type === 'dinner'
                   )
                   .pop(),
-                img: recipe.image,
+                img: recipe.image === null ? defaultPhoto : recipe.image,
                 readyTime: recipe.readyInMinutes,
                 servings: recipe.servings,
                 url: recipe.sourceUrl,

@@ -7,6 +7,7 @@ import { recipes } from './recipes';
 import { fetchedRecipes } from './fetchRecipes';
 import { ingredients } from './ingredients';
 import { mealPlans } from './mealPlans';
+import { users } from './users';
 
 const reducer = combineReducers({
   auth,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   fetchedRecipes,
   ingredients,
   mealPlans,
+  users,
 });
 
 const middleware = composeWithDevTools(
@@ -28,3 +30,4 @@ export * from './recipes';
 export * from './fetchRecipes';
 export * from './ingredients';
 export * from './mealPlans';
+export * from './users';

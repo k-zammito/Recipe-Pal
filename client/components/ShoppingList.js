@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ListHeader from './ListHeader';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ShoppingItem from './ShoppingItem';
 
 const ShoppingList = () => {
   const userId = useSelector((state) => state.auth.id) || '';
@@ -25,8 +26,8 @@ const ShoppingList = () => {
 
   const ingNames = ingredients.map((ing) => ing.name);
   const uniqueIngNames = [...new Set(ingNames)];
-  console.log('UNIQUE INGREDIENTS', uniqueIngNames);
-  console.log('ALL INGREDIENTS', ingredients);
+  // console.log('UNIQUE INGREDIENTS', uniqueIngNames);
+  // console.log('ALL INGREDIENTS', ingredients);
 
   // console.log(uniqueAisles);
   // console.log('ING NAMES', ingNames);
@@ -79,6 +80,7 @@ const ShoppingList = () => {
         <div>
           {ingEnt.sort().map((ingred, idx) => (
             <li key={idx} className="list-item">
+              {/* <ShoppingItem toggleLineThru={}/> */}
               <span
                 className="list-item-text"
                 style={{ textDecoration: toggleLineThru(lineThru) }}
