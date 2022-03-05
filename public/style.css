@@ -160,21 +160,17 @@ input {
   color: rgb(189, 3, 3);
 }
 
-button {
-  background: #f19d65;
-  color: white;
-  cursor: pointer;
-}
-
-button {
+.form-button {
   background: #f8a66f;
+  width: 180px;
+  border-radius: 7px;
   color: white;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
-button:hover {
-  background: #fa873b;
+.form-button:hover {
+  background: #f78438;
 }
 
 button:disabled {
@@ -220,7 +216,7 @@ button:disabled {
   margin-bottom: 50px;
 }
 
-.list-header h3 {
+.list-header h2 {
   color: #30332c;
   text-align: center;
   font-family: Roboto;
@@ -239,10 +235,16 @@ button:disabled {
   max-height: 20px;
   font-weight: bold;
   transition: 0.5s;
+  /* text-decoration: line-through; */
 }
 
 .list-item:hover {
   background-color: #b1d7ac;
+}
+
+.list-item-text {
+  font-size: 15px;
+  text-align: center;
 }
 
 .button-complete,

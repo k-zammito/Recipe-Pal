@@ -39,9 +39,10 @@ export const RecipeName = styled.span`
   margin: 10px 0;
 `;
 
-export const IngredientsText = styled.span`
+export const IngredientsText = styled.button`
   font-size: 18px;
   border: solid 1px #6aa238;
+  background-color: white;
   color: black;
   margin: 10px 0;
   cursor: pointer;
@@ -49,6 +50,7 @@ export const IngredientsText = styled.span`
   border-radius: 7px;
   color: #6aa238;
   text-align: center;
+  width: 200px;
 `;
 
 export const ViewRecipeText = styled(IngredientsText)`

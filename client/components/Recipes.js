@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createRecipe, createIngredient, deleteRecipe } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 import { unitConversion } from './conversions';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import {
   Container,
@@ -120,11 +121,15 @@ const Recipes = () => {
                   {recipe.title}
                   {/* Serves: {recipe.servings} */}
                 </RecipeName>
-                <IngredientsText>ingredients</IngredientsText>
-                <ViewRecipeText>
-                  <a href={recipe.url} target="_blank"></a>
-                  see complete recipe
-                </ViewRecipeText>
+
+                <Link to="/shoppinglist">
+                  <IngredientsText>ingredients</IngredientsText>
+                </Link>
+
+                <a href={recipe.url} target="_blank">
+                  <ViewRecipeText>see complete recipe</ViewRecipeText>
+                </a>
+
                 {/* <button
                   onClick={() => dispatch(deleteRecipe(recipe.id))}
                   style={{ width: 250 }}

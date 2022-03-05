@@ -67,10 +67,12 @@ const ShoppingList = () => {
         <div>
           {ingEnt.sort().map((ingred, idx) => (
             <li key={idx} className="list-item">
-              <span>{`${ingred[0]} `}</span>
-              <span>
+              <span className="list-item-text">{`${ingred[0]} `}</span>
+              <span className="list-item-text">
                 {ingred.slice(1).map((ing, idx, array) => (
-                  <span key={idx}>{`(${ing.join(' ')})`}</span>
+                  <span key={idx} className="list-item-text">{`(${ing.join(
+                    ' '
+                  )})`}</span>
                 ))}
               </span>
               <div>

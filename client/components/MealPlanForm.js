@@ -120,7 +120,7 @@ export default function MealPlanForm() {
         ) : null}
         <Link to="/recipes">
           <button
-            className="form-field"
+            className="form-field form-button"
             type="submit"
             onClick={() =>
               dispatch(
