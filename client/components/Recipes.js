@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createRecipe, createIngredient, deleteRecipe } from '../store';
+import {
+  createRecipe,
+  createIngredient,
+  deleteRecipe,
+  deleteIngredient,
+} from '../store';
 import { v4 as uuidv4 } from 'uuid';
 import { unitConversion } from './conversions';
 import { Link } from 'react-router-dom';
@@ -49,6 +54,17 @@ const Recipes = () => {
   // console.log('ING', ingredients);
 
   // ADD RECIPES TO DB
+
+  // const recipeAndIngredDelete = (recipeId) => {
+  //   ingredients.map((ingred) => {
+  //     if (ingred.mealId === recipeId) {
+  //       dispatch(deleteIngredient(ingred.id));
+  //     }
+  //   });
+
+  //   dispatch(deleteRecipe(recipeId));
+  // };
+
   useEffect(() => {
     async function fetchRecipes() {
       await fetchedRecipes.map((recipe) => {
@@ -135,15 +151,9 @@ const Recipes = () => {
 
                 {/* <button
                   onClick={() => dispatch(deleteRecipe(recipe.id))}
-                  style={{ width: 250 }}
+                  style={{ width: 150 }}
                 >
                   delete recipe
-                </button> */}
-                {/* <button
-                  onClick={() => dispatch(deleteRecipe(recipe.id))}
-                  style={{ width: 250 }}
-                >
-                  delete ingredients
                 </button> */}
               </RecipeContainer>
             );
