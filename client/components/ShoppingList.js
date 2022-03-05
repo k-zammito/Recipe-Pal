@@ -57,7 +57,7 @@ const ShoppingList = () => {
   // console.log('entries', ingEnt);
 
   return (
-    <div>
+    <div className="shopping-list">
       <h3>Shopping List: ({uniqueIngNames.length} items)</h3>
       {/* {uniqueAisles.sort().map((aisle, idx) => {
         return (

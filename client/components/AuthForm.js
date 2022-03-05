@@ -11,7 +11,7 @@ const AuthForm = (props) => {
   const history = useHistory();
 
   return (
-    <div>
+    <div className="auth-form">
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">

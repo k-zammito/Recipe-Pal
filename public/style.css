@@ -6,6 +6,13 @@ body {
   font-family: 'Roboto', sans-serif;
   padding: 0;
   margin: 0;
+  background-image: url('background.jpg');
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  background-size: cover;
 }
 
 a {
@@ -46,13 +53,17 @@ form div {
   display: inline-block;
 }
 
+.auth-form {
+  margin-top: 80px;
+}
+
 .navbar {
-  /* position: fixed; */
-  /* overflow: hidden; */
+  position: fixed;
+  overflow: hidden;
   top: 0;
   background: #30332c;
   color: white;
-  /* z-index: 5; */
+  z-index: 5;
   width: 100%;
   color: black;
   align-items: center;
@@ -106,7 +117,9 @@ form div {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   padding: 10px;
   display: flex;
+  /* flex-direction: column; */
   justify-content: center;
+  /* text-align: center; */
 }
 
 .register-form {
@@ -150,11 +163,21 @@ input {
 }
 
 button {
-  background: #ffb545;
+  background: #f19d65;
   color: white;
   cursor: pointer;
 }
 
 button:disabled {
   cursor: default;
+}
+
+/* -------------------shopping list css-------------------- */
+
+.shopping-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 80px;
+  margin-bottom: 50px;
+  margin-left: 40%;
 }

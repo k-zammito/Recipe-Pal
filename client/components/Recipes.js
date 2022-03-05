@@ -4,6 +4,15 @@ import { createRecipe, createIngredient, deleteRecipe } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 import { unitConversion } from './conversions';
 import _ from 'lodash';
+import {
+  Container,
+  RecipeContainer,
+  RecipeListContainer,
+  CoverImage,
+  RecipeName,
+  IngredientsText,
+  ViewRecipeText,
+} from './recipeComponent';
 
 const Recipes = () => {
   const fetchedRecipes = useSelector((state) => state.fetchedRecipes);
@@ -25,8 +34,6 @@ const Recipes = () => {
   const dispatch = useDispatch();
 
   const recipeTitles = recipes.map((recipe) => recipe.title);
-
-  // const deleteIngredients;
 
   // console.log('REC', recipes);
 
@@ -98,40 +105,42 @@ const Recipes = () => {
   }, [fetchedRecipes]);
 
   return (
-    <div>
+    <Container>
       {recipes.length === 0 ? (
-        <h2>There are no recipes :(</h2>
+        <h2>There are no recipes.</h2>
       ) : (
-        <div>
-          <h1>Recipes</h1>
+        <RecipeListContainer>
           {recipes.map((recipe) => {
             return (
-              <div
-                key={recipe.id}
-                style={{ display: 'flex', flexDirection: 'column' }}
-              >
-                {recipe.title} - Serves: {recipe.servings}
-                <a href={recipe.url} target="_blank" style={{ width: 250 }}>
-                  <img src={recipe.img} style={{ width: 250 }} />
-                </a>
-                <button
+              <RecipeContainer key={recipe.id}>
+                <CoverImage src={recipe.img} />
+                <RecipeName>
+                  {recipe.title}
+                  {/* Serves: {recipe.servings} */}
+                </RecipeName>
+                <IngredientsText>ingredients</IngredientsText>
+                <ViewRecipeText>
+                  <a href={recipe.url} target="_blank"></a>
+                  see complete recipe
+                </ViewRecipeText>
+                {/* <button
                   onClick={() => dispatch(deleteRecipe(recipe.id))}
                   style={{ width: 250 }}
                 >
                   delete recipe
-                </button>
-                <button
+                </button> */}
+                {/* <button
                   onClick={() => dispatch(deleteRecipe(recipe.id))}
                   style={{ width: 250 }}
                 >
                   delete ingredients
-                </button>
-              </div>
+                </button> */}
+              </RecipeContainer>
             );
           })}
-        </div>
+        </RecipeListContainer>
       )}
-    </div>
+    </Container>
   );
 };
 
