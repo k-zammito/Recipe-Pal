@@ -20,10 +20,15 @@ const Navbar = ({ handleClick, isLoggedIn, userName }) => (
             <span style={{ marginRight: 25, fontStyle: 'italic' }}>
               Welcome, {userName}
             </span>
-            <Link to="/">Home</Link>
+            <Link to="/">Create Recipes</Link>
             <Link to="/recipes">My Recipes</Link>
             <Link to="/shoppinglist">Shopping List</Link>
-            <a href="#" onClick={handleClick} className="nav-logout">
+            <a
+              href="#"
+              onClick={handleClick}
+              className="nav-logout"
+              style={{ alignSelf: 'center' }}
+            >
               {/* <ExitToAppIcon className="nav-icon" /> */}
               Logout
             </a>

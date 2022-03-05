@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import ListHeader from './ListHeader';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const ShoppingList = () => {
   const userId = useSelector((state) => state.auth.id) || '';
@@ -57,28 +59,54 @@ const ShoppingList = () => {
   // console.log('entries', ingEnt);
 
   return (
-    <div className="shopping-list">
-      <h3>Shopping List: ({uniqueIngNames.length} items)</h3>
-      {/* {uniqueAisles.sort().map((aisle, idx) => {
-        return (
-          <div key={idx}>
-            <h5>Aisle: {aisle === null || aisle === '?' ? 'Other' : aisle} </h5> */}
-      {ingEnt.sort().map((ingred, idx) => (
-        <div key={idx}>
-          <span style={{ fontWeight: 600 }}>{`- ${ingred[0]}, `}</span>
-          <span>
-            (
-            {ingred.slice(1).map((ing, idx, array) => (
-              <span key={idx}>{ing.join(' ')}</span>
-            ))}
-            )
-          </span>
+    <div className="list-container">
+      <div className="list-wrapper">
+        <div>
+          <ListHeader ingredientsLength={uniqueIngNames} />
         </div>
-      ))}
-      {/* </div>
-        );
-      })} */}
+        <div>
+          {ingEnt.sort().map((ingred, idx) => (
+            <li key={idx} className="list-item">
+              <span>{`${ingred[0]} `}</span>
+              <span>
+                {ingred.slice(1).map((ing, idx, array) => (
+                  <span key={idx}>{`(${ing.join(' ')})`}</span>
+                ))}
+              </span>
+              <div>
+                {/* <button className="">
+
+                </button> */}
+              </div>
+            </li>
+          ))}
+        </div>
+      </div>
     </div>
+
+    //LIST RENDERING BELOW ----->
+    // <div className="shopping-list">
+    //   <h3>Shopping List: ({uniqueIngNames.length} items)</h3>
+    //   {/* {uniqueAisles.sort().map((aisle, idx) => {
+    //     return (
+    //       <div key={idx}>
+    //         <h5>Aisle: {aisle === null || aisle === '?' ? 'Other' : aisle} </h5> */}
+    //   {ingEnt.sort().map((ingred, idx) => (
+    //     <div key={idx}>
+    //       <span style={{ fontWeight: 600 }}>{`- ${ingred[0]}, `}</span>
+    //       <span>
+    //         (
+    //         {ingred.slice(1).map((ing, idx, array) => (
+    //           <span key={idx}>{ing.join(' ')}</span>
+    //         ))}
+    //         )
+    //       </span>
+    //     </div>
+    //   ))}
+    //   {/* </div>
+    //     );
+    //   })} */}
+    // </div>
   );
 };
 

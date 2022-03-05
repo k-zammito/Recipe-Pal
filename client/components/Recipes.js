@@ -60,10 +60,10 @@ const Recipes = () => {
                 dishType: recipe.dishTypes
                   .filter(
                     (type) =>
+                      type === 'dessert' ||
                       type === 'breakfast' ||
                       type === 'lunch' ||
-                      type === 'dinner' ||
-                      type === 'dessert'
+                      type === 'dinner'
                   )
                   .pop(),
                 img: recipe.image,
@@ -107,7 +107,9 @@ const Recipes = () => {
   return (
     <Container>
       {recipes.length === 0 ? (
-        <h2>There are no recipes.</h2>
+        <div className="no-recipes">
+          <h2>There are no recipes :(</h2>
+        </div>
       ) : (
         <RecipeListContainer>
           {recipes.map((recipe) => {
