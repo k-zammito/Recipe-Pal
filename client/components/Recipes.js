@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createRecipe, createIngredient, deleteRecipe } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 import { unitConversion } from './conversions';
+import _ from 'lodash';
 
 const Recipes = () => {
   const fetchedRecipes = useSelector((state) => state.fetchedRecipes);
@@ -25,14 +26,16 @@ const Recipes = () => {
 
   const recipeTitles = recipes.map((recipe) => recipe.title);
 
-  console.log('REC', recipes);
+  // const deleteIngredients;
+
+  // console.log('REC', recipes);
 
   //   console.log('STATE', state);
 
   //   console.log(fetchedRecipes);
 
   // console.log('TITLES', recipeTitles);
-  console.log('ING', ingredients);
+  // console.log('ING', ingredients);
 
   // ADD RECIPES TO DB
   useEffect(() => {
@@ -111,12 +114,18 @@ const Recipes = () => {
                 <a href={recipe.url} target="_blank" style={{ width: 250 }}>
                   <img src={recipe.img} style={{ width: 250 }} />
                 </a>
-                {/* <button
+                <button
                   onClick={() => dispatch(deleteRecipe(recipe.id))}
                   style={{ width: 250 }}
                 >
-                  delete
-                </button> */}
+                  delete recipe
+                </button>
+                <button
+                  onClick={() => dispatch(deleteRecipe(recipe.id))}
+                  style={{ width: 250 }}
+                >
+                  delete ingredients
+                </button>
               </div>
             );
           })}

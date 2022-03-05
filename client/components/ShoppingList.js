@@ -29,6 +29,18 @@ const ShoppingList = () => {
   // console.log(uniqueAisles);
   // console.log('ING NAMES', ingNames);
 
+  const measurementCombiner = (arr) => {
+    const result = {};
+    const nums = arr.slice(1).filter((_, idx) => idx % 2 === 0);
+    const units = arr.slice(1).filter((_, idx) => idx % 2 === 1);
+
+    units.forEach((key, i) =>
+      result[key] ? (result[key] += nums[i]) : (result[key] = nums[i])
+    );
+
+    return Object.entries(result);
+  };
+
   const ingReduce = ingredients.reduce((acc, ing) => {
     if (acc[ing.name] && acc[ing.name][1] === ing.unit) {
       acc[ing.name][0] += ing.amount * 1;
@@ -44,7 +56,6 @@ const ShoppingList = () => {
   const ingEnt = Object.entries(ingReduce);
   // console.log('entries', ingEnt);
 
-  console.log('REDUCE ING', ingReduce);
   return (
     <div>
       <h3>Shopping List: ({uniqueIngNames.length} items)</h3>
@@ -57,7 +68,7 @@ const ShoppingList = () => {
           <span style={{ fontWeight: 600 }}>{`- ${ingred[0]}, `}</span>
           <span>
             (
-            {ingred.slice(1).map((ing, idx) => (
+            {ingred.slice(1).map((ing, idx, array) => (
               <span key={idx}>{ing.join(' ')}</span>
             ))}
             )

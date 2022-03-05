@@ -1,9 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400);
 
 /* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap'); */
 
 body {
-  font-family: 'Ariel', sans-serif;
+  font-family: 'Roboto', sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -12,13 +12,27 @@ a {
   text-decoration: none;
 }
 
+a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 label {
   display: block;
+}
+
+nav {
+  color: white;
 }
 
 nav a {
   display: inline-block;
   margin: 1em;
+  text-decoration: none;
 }
 
 form div {
@@ -30,7 +44,8 @@ form div {
   /* position: fixed; */
   /* overflow: hidden; */
   top: 0;
-  background: white;
+  background: #30332c;
+  color: white;
   /* z-index: 5; */
   width: 100%;
   color: black;
@@ -40,7 +55,7 @@ form div {
 .navbar-wrap {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 0.5px solid lightgray;
   align-items: center;
 }
 
@@ -49,24 +64,41 @@ form div {
 }
 
 .navbar-logo {
-  height: 60px;
+  height: 55px;
+  padding: 10px;
+}
+
+.home {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   padding: 10px;
 }
 /* --------------- input form ccs ------------------ */
 
 .form-container {
-  width: 360px;
+  width: 300px;
+  height: 340px;
   background-color: white;
   margin: auto;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   padding: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .register-form {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
+  /* align-items: center; */
   padding: 10px;
+}
+
+.register-form button {
+  margin-left: 46px;
+  margin-top: 15px;
 }
 
 .success-message {
@@ -99,84 +131,11 @@ input {
 }
 
 button {
-  /* background: #4caf50; */
-  /* color: white; */
+  background: #ffb545;
+  color: white;
   cursor: pointer;
 }
 
 button:disabled {
   cursor: default;
-}
-
-/* ------------ modal css ------------- */
-
-.modalBackground {
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(200, 200, 200);
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modalContainer {
-  width: 500px;
-  height: 500px;
-  border-radius: 12px;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  display: flex;
-  flex-direction: column;
-  padding: 25px;
-}
-
-.modalContainer .title {
-  display: inline-block;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.titleCloseBtn {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.titleCloseBtn button {
-  background-color: transparent;
-  border: none;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-.modalContainer .body {
-  flex: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.7rem;
-  text-align: center;
-}
-
-.modalContainer .footer {
-  flex: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modalContainer .footer button {
-  width: 150px;
-  height: 45px;
-  margin: 10px;
-  border: none;
-  background-color: cornflowerblue;
-  color: white;
-  border-radius: 8px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.cancelBtn {
-  background-color: crimson;
 }

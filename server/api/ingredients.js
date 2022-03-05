@@ -23,20 +23,20 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// DELETE A Ingredient
-// router.delete('/:id', async (req, res, next) => {
-//   try {
-//     const Ingredient = await Ingredient.findByPk(req.params.id);
-//     if (!Ingredient) {
-//       res.sendStatus(404);
-//     } else {
-//       await Ingredient.destroy();
-//       res.sendStatus(204);
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+// DELETE AN Ingredient
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const ingredient = await ingredient.findByPk(req.params.id);
+    if (!ingredient) {
+      res.sendStatus(404);
+    } else {
+      await ingredient.destroy();
+      res.sendStatus(204);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
 // UPDATE A Ingredient
 // router.put('/:id', async (req, res, next) => {

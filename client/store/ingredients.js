@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const GET_INGREDIENTS = 'GET_INGREDIENTS';
 const CREATE_INGREDIENT = 'CREATE_INGREDIENT';
+const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 
 /**
  * ACTION CREATORS
@@ -22,6 +23,13 @@ const _createingredient = (ingredient) => {
   return {
     type: CREATE_INGREDIENT,
     ingredient,
+  };
+};
+
+const _deleteIngredient = (id) => {
+  return {
+    type: DELETE_INGREDIENT,
+    id,
   };
 };
 
@@ -44,6 +52,13 @@ export const createIngredient = (ingredient) => {
   };
 };
 
+export const deleteIngredient = (id) => {
+  return async (dispatch) => {
+    await axios.delete(`/api/ingredients/${id}`);
+    dispatch(_deleteIngredient(id));
+  };
+};
+
 /**
  * REDUCER
  */
@@ -54,6 +69,8 @@ export const ingredients = (state = [], action) => {
       return action.ingredients;
     case CREATE_INGREDIENT:
       return [...state, action.ingredient];
+    case DELETE_INGREDIENT:
+      return state.filter((ingredient) => ingredient.id !== action.id);
     default:
       return state;
   }
