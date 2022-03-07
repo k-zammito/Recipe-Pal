@@ -4,6 +4,7 @@ import axios from 'axios';
  * ACTION TYPES
  */
 const FETCH_RECIPES = 'FETCH_RECIPES';
+const CLEAR_FETCHED_RECIPES = 'CLEAR_FETCHED_RECIPES';
 
 /**
  * ACTION CREATORS
@@ -12,6 +13,13 @@ const _fetchRecipes = (recipe) => {
   return {
     type: FETCH_RECIPES,
     recipe,
+  };
+};
+
+const _clearFetchedRecipes = (recipes) => {
+  return {
+    type: CLEAR_FETCHED_RECIPES,
+    recipes,
   };
 };
 
@@ -36,6 +44,13 @@ export const fetchRecipes = (tag1, tag2, amount) => {
   };
 };
 
+export const clearFetchedRecipes = (recipes) => {
+  return (dispatch) => {
+    const clearedRecipes = recipes.splice(0, recipes.length);
+    dispatch(_clearFetchedRecipes(clearedRecipes));
+  };
+};
+
 /**
  * REDUCER
  */
@@ -44,6 +59,8 @@ export const fetchedRecipes = (state = [], action) => {
   switch (action.type) {
     case FETCH_RECIPES:
       return action.recipe;
+    case CLEAR_FETCHED_RECIPES:
+      return state.splice(0, state.length);
     default:
       return state;
   }

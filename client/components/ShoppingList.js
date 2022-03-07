@@ -16,7 +16,10 @@ const ShoppingList = () => {
   // );
 
   const ingredients = useSelector((state) =>
-    state.ingredients.filter((ing) => ing.mealplanId === currMealPlan.id)
+    state.ingredients.filter(
+      (ing) =>
+        ing.mealplanId === currMealPlan.id && currMealPlan.userId === userId
+    )
   );
 
   // console.log('USER MEALS', userMeals);
@@ -27,7 +30,7 @@ const ShoppingList = () => {
   const ingNames = ingredients.map((ing) => ing.name);
   const uniqueIngNames = [...new Set(ingNames)];
   // console.log('UNIQUE INGREDIENTS', uniqueIngNames);
-  // console.log('ALL INGREDIENTS', ingredients);
+  console.log('ALL INGREDIENTS', ingredients);
 
   // console.log(uniqueAisles);
   // console.log('ING NAMES', ingNames);

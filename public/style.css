@@ -109,6 +109,10 @@ form div {
 /* --------------- input form ccs ------------------ */
 
 .form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 300px;
   height: 340px;
   background-color: white;
@@ -311,9 +315,12 @@ input:focus button:focus {
 }
 
 .su-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: white;
   padding-top: 20px;
-  margin-top: 280px;
   width: 350px;
   height: 300px;
   display: flex;

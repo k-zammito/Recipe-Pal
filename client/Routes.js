@@ -33,10 +33,6 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-
-    console.log('recipes', this.props.recipes);
-    console.log('meal plans', this.props.mealPlans);
-
     return (
       <div>
         {isLoggedIn ? (

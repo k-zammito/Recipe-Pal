@@ -5,6 +5,7 @@ import {
   createIngredient,
   deleteRecipe,
   deleteIngredient,
+  clearFetchedRecipes,
 } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 import { unitConversion } from './conversions';
@@ -48,7 +49,7 @@ const Recipes = () => {
 
   //   console.log('STATE', state);
 
-  //   console.log(fetchedRecipes);
+  // console.log('FETCHED RECIPES', fetchedRecipes);
 
   // console.log('TITLES', recipeTitles);
   // console.log('ING', ingredients);
@@ -122,6 +123,8 @@ const Recipes = () => {
     }
     fetchRecipes();
     fetchIngredients();
+
+    fetchedRecipes.length > 0 && dispatch(clearFetchedRecipes(fetchedRecipes));
   }, [fetchedRecipes]);
 
   return (
@@ -158,6 +161,9 @@ const Recipes = () => {
               </RecipeContainer>
             );
           })}
+          {/* <button onClick={() => dispatch(clearFetchedRecipes(fetchedRecipes))}>
+            YO!
+          </button> */}
         </RecipeListContainer>
       )}
     </Container>
