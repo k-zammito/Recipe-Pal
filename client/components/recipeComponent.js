@@ -51,9 +51,15 @@ export const IngredientsText = styled.button`
   color: #6aa238;
   text-align: center;
   width: 200px;
+  transition: 0.5s;
 `;
 
 export const ViewRecipeText = styled(IngredientsText)`
   border: solid 1px #ce9773;
   color: #ce9773;
+`;
+
+export const DeleteText = styled(IngredientsText)`
+  border: solid 1px #f56868;
+  color: #f56868;
 `;

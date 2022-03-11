@@ -120,6 +120,9 @@ export default function MealPlanForm() {
         ) : null}
         <Link to="/recipes">
           <button
+            disabled={
+              !values.mealType || !values.dietType || !values.numOfMeals
+            }
             className="form-field form-button"
             type="submit"
             onClick={() =>

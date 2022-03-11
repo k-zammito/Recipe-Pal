@@ -26,7 +26,7 @@ router.post('/', async (req, res, next) => {
 // DELETE AN Ingredient
 router.delete('/:id', async (req, res, next) => {
   try {
-    const ingredient = await ingredient.findByPk(req.params.id);
+    const ingredient = await Ingredient.findByPk(req.params.id);
     if (!ingredient) {
       res.sendStatus(404);
     } else {
@@ -38,12 +38,12 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
-// UPDATE A Ingredient
-// router.put('/:id', async (req, res, next) => {
-//   try {
-//     const Ingredient = await Ingredient.findByPk(req.params.id);
-//     res.send(await Ingredient.update(req.body));
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+// UPDATE AN INGREDIENT
+router.put('/:id', async (req, res, next) => {
+  try {
+    const ingredient = await ingredient.findByPk(req.params.id);
+    res.send(await ingredient.update(req.body));
+  } catch (error) {
+    next(error);
+  }
+});

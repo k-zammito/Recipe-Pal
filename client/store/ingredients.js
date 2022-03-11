@@ -7,6 +7,7 @@ import axios from 'axios';
 const GET_INGREDIENTS = 'GET_INGREDIENTS';
 const CREATE_INGREDIENT = 'CREATE_INGREDIENT';
 const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
+const UPDATE_INGREDIENT = 'UPDATE_INGREDIENT';
 
 /**
  * ACTION CREATORS
@@ -30,6 +31,13 @@ const _deleteIngredient = (id) => {
   return {
     type: DELETE_INGREDIENT,
     id,
+  };
+};
+
+const _updateIngredient = (ingredient) => {
+  return {
+    type: UPDATE_INGREDIENT,
+    ingredient,
   };
 };
 
@@ -59,6 +67,15 @@ export const deleteIngredient = (id) => {
   };
 };
 
+export const updateIngredient = (ingredient) => {
+  return async (dispatch) => {
+    ingredient = (
+      await axios.put(`/api/ingredients/${ingredient.id}`, ingredient)
+    ).data;
+    dispatch(_updateIngredient(ingredient));
+  };
+};
+
 /**
  * REDUCER
  */
@@ -71,6 +88,10 @@ export const ingredients = (state = [], action) => {
       return [...state, action.ingredient];
     case DELETE_INGREDIENT:
       return state.filter((ingredient) => ingredient.id !== action.id);
+    case UPDATE_INGREDIENT:
+      return state.map((ingredient) =>
+        ingredient.id === action.ingredient.id ? action.ingredient : ingredient
+      );
     default:
       return state;
   }

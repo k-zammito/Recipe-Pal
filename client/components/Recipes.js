@@ -19,6 +19,7 @@ import {
   RecipeName,
   IngredientsText,
   ViewRecipeText,
+  DeleteText,
 } from './recipeComponent';
 
 const Recipes = () => {
@@ -34,9 +35,11 @@ const Recipes = () => {
   );
 
   const ingredients = useSelector((state) =>
-    state.ingredients.filter((ing) => ing.mealplanId === currMealPlan.id)
+    state.ingredients.filter(
+      (ing) =>
+        ing.mealplanId === currMealPlan.id && currMealPlan.userId === userId
+    )
   );
-  const state = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
@@ -45,26 +48,16 @@ const Recipes = () => {
   const defaultPhoto =
     'https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/migrated_attachments/meal-918638_1280-1.webp?itok=dMJGxEC2';
 
-  // console.log('REC', recipes);
+  // console.log('Fetched recipes', fetchedRecipes);
 
-  //   console.log('STATE', state);
+  const handleDelete = async (recipeId) => {
+    const currIngreds = ingredients.filter(
+      (ingred) => ingred.mealId === recipeId
+    );
 
-  // console.log('FETCHED RECIPES', fetchedRecipes);
-
-  // console.log('TITLES', recipeTitles);
-  // console.log('ING', ingredients);
-
-  // ADD RECIPES TO DB
-
-  // const recipeAndIngredDelete = (recipeId) => {
-  //   ingredients.map((ingred) => {
-  //     if (ingred.mealId === recipeId) {
-  //       dispatch(deleteIngredient(ingred.id));
-  //     }
-  //   });
-
-  //   dispatch(deleteRecipe(recipeId));
-  // };
+    currIngreds.forEach((ingred) => dispatch(deleteIngredient(ingred.id)));
+    dispatch(deleteRecipe(recipeId));
+  };
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -145,25 +138,32 @@ const Recipes = () => {
                 </RecipeName>
 
                 <Link to="/shoppinglist">
-                  <IngredientsText>ingredients</IngredientsText>
+                  <IngredientsText className="card-btn-ingred">
+                    ingredients
+                  </IngredientsText>
                 </Link>
 
                 <a href={recipe.url} target="_blank">
-                  <ViewRecipeText>see complete recipe</ViewRecipeText>
+                  <ViewRecipeText className="card-btn-view">
+                    view recipe
+                  </ViewRecipeText>
                 </a>
 
                 {/* <button
-                  onClick={() => dispatch(deleteRecipe(recipe.id))}
+                  onClick={() => handleDelete(recipe.id)}
                   style={{ width: 150 }}
+                > */}
+                <DeleteText
+                  className="card-btn-delete"
+                  onClick={() => handleDelete(recipe.id)}
+                  style={{ marginLeft: 13 }}
                 >
                   delete recipe
-                </button> */}
+                </DeleteText>
+                {/* </button> */}
               </RecipeContainer>
             );
           })}
-          {/* <button onClick={() => dispatch(clearFetchedRecipes(fetchedRecipes))}>
-            YO!
-          </button> */}
         </RecipeListContainer>
       )}
     </Container>
