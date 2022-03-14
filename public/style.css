@@ -224,7 +224,7 @@ button:disabled {
 
 .list-wrapper {
   background-color: #ffffff;
-  min-width: 450px;
+  min-width: 500px;
   min-height: 550px;
   padding: 40px;
   box-sizing: border-box;
@@ -253,6 +253,8 @@ button:disabled {
   font-weight: bold;
   transition: 0.5s;
   justify-content: space-between;
+  text-align: center;
+
   /* text-decoration: line-through; */
 }
 
@@ -266,7 +268,7 @@ button:disabled {
   /* text-decoration: line-through; */
 }
 
-.button-complete,
+/* .button-complete,
 .button-delete,
 .button-edit {
   border: none;
@@ -275,11 +277,23 @@ button:disabled {
   background-color: transparent;
   font-size: 28px;
   border-radius: 50%;
-}
+} */
 
 .button-complete {
   margin-right: 10px;
   color: #568230;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 14px;
+  /* align-items: center;
+  justify-content: center; */
+}
+
+.check-box {
+  display: flex;
+  text-align: center;
 }
 
 .complete {

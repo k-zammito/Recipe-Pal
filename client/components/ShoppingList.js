@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ListHeader from './ListHeader';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import ShoppingItem from './ShoppingItem';
 
 const ShoppingList = () => {
@@ -72,7 +77,8 @@ const ShoppingList = () => {
     }
   };
 
-  const [lineThru, setLineThrough] = useState(false);
+  const [lineThru, setLineThru] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   return (
     <div className="list-container">
@@ -82,7 +88,7 @@ const ShoppingList = () => {
         </div>
         <div>
           {ingEnt.sort().map((ingred, idx) => (
-            <li key={idx} className="list-item">
+            <div key={idx} className="list-item">
               {/* <ShoppingItem toggleLineThru={}/> */}
               <span
                 className="list-item-text"
@@ -95,13 +101,17 @@ const ShoppingList = () => {
                   )})`}</span>
                 ))}
               </span>
-              <div>
-                <CheckCircleIcon
-                  className="button-complete task-button"
-                  onClick={() => setLineThrough(!lineThru)}
-                />
-              </div>
-            </li>
+              {/* <div className="check-box"> */}
+              <Checkbox
+                disableRipple={true}
+                style={{ background: 'none' }}
+                // onClick={() => setLineThru(!lineThru)}
+                icon={<RadioButtonUncheckedIcon className="button-complete" />}
+                checkedIcon={<CheckCircleIcon className="button-complete" />}
+                name="checked"
+              />
+              {/* </div> */}
+            </div>
           ))}
         </div>
       </div>
