@@ -127,44 +127,46 @@ const Recipes = () => {
           <h2>There are no recipes :(</h2>
         </div>
       ) : (
-        <RecipeListContainer>
-          {recipes.map((recipe) => {
-            return (
-              <RecipeContainer key={recipe.id}>
-                <CoverImage src={recipe.img} />
-                <RecipeName>
-                  {recipe.title}
-                  {/* Serves: {recipe.servings} */}
-                </RecipeName>
+        <div className="recipe-container">
+          <RecipeListContainer>
+            {recipes.map((recipe) => {
+              return (
+                <RecipeContainer key={recipe.id}>
+                  <CoverImage src={recipe.img} />
+                  <RecipeName>
+                    {recipe.title}
+                    {/* Serves: {recipe.servings} */}
+                  </RecipeName>
 
-                <Link to="/shoppinglist">
-                  <IngredientsText className="card-btn-ingred">
-                    ingredients
-                  </IngredientsText>
-                </Link>
+                  <Link to="/shoppinglist">
+                    <IngredientsText className="card-btn-ingred">
+                      ingredients
+                    </IngredientsText>
+                  </Link>
 
-                <a href={recipe.url} target="_blank">
-                  <ViewRecipeText className="card-btn-view">
-                    view recipe
-                  </ViewRecipeText>
-                </a>
+                  <a href={recipe.url} target="_blank">
+                    <ViewRecipeText className="card-btn-view">
+                      view recipe
+                    </ViewRecipeText>
+                  </a>
 
-                {/* <button
+                  {/* <button
                   onClick={() => handleDelete(recipe.id)}
                   style={{ width: 150 }}
                 > */}
-                <DeleteText
-                  className="card-btn-delete"
-                  onClick={() => handleDelete(recipe.id)}
-                  style={{ marginLeft: 13 }}
-                >
-                  delete recipe
-                </DeleteText>
-                {/* </button> */}
-              </RecipeContainer>
-            );
-          })}
-        </RecipeListContainer>
+                  <DeleteText
+                    className="card-btn-delete"
+                    onClick={() => handleDelete(recipe.id)}
+                    style={{ marginLeft: 13 }}
+                  >
+                    delete recipe
+                  </DeleteText>
+                  {/* </button> */}
+                </RecipeContainer>
+              );
+            })}
+          </RecipeListContainer>
+        </div>
       )}
     </Container>
   );
