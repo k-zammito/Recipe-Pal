@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ListHeader from './ListHeader';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Favorite from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import ShoppingItem from './ShoppingItem';
 
 const ShoppingList = () => {
   const userId = useSelector((state) => state.auth.id) || '';
@@ -16,9 +13,7 @@ const ShoppingList = () => {
       state.mealPlans.find((mealPlan) => mealPlan.userId === userId) || {}
   );
 
-  // const userMeals = useSelector((state) =>
-  //   state.recipes.filter((meal) => meal.mealplanId === currMealPlan.id)
-  // );
+  const auth = useSelector((state) => state.auth);
 
   const ingredients = useSelector((state) =>
     state.ingredients.filter(
@@ -33,9 +28,9 @@ const ShoppingList = () => {
   const uniqueAisles = [...new Set(aisles)];
 
   const ingNames = ingredients.map((ing) => ing.name);
-  const uniqueIngNames = [...new Set(ingNames)];
+  const uniqueIngNames = [...new Set(ingNames)].sort();
   // console.log('UNIQUE INGREDIENTS', uniqueIngNames);
-  console.log('ALL INGREDIENTS', ingredients);
+  // console.log('ALL INGREDIENTS', ingredients);
 
   // console.log(uniqueAisles);
   // console.log('ING NAMES', ingNames);
@@ -66,6 +61,7 @@ const ShoppingList = () => {
 
   const ingEnt = Object.entries(ingReduce);
   // console.log('entries', ingEnt);
+  // console.log('ing names', uniqueIngNames);
 
   const toggleLineThru = (boolen) => {
     if (boolen) {
@@ -77,8 +73,26 @@ const ShoppingList = () => {
     }
   };
 
-  const [lineThru, setLineThru] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [checkedState, setCheckedState] = useState(
+    new Array(ingEnt.length).fill(false)
+  );
+
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+  };
+
+  useEffect(() => {
+    setCheckedState(JSON.parse(window.localStorage.getItem('checkedState')));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('checkedState', JSON.stringify(checkedState));
+    // console.log('checked state', checkedState);
+  }, [checkedState]);
 
   return (
     <div className="list-container">
@@ -89,28 +103,33 @@ const ShoppingList = () => {
         <div>
           {ingEnt.sort().map((ingred, idx) => (
             <div key={idx} className="list-item">
-              {/* <ShoppingItem toggleLineThru={}/> */}
               <span
                 className="list-item-text"
-                style={{ textDecoration: toggleLineThru(lineThru) }}
+                style={{ textDecoration: toggleLineThru(checkedState[idx]) }}
               >
                 {`${ingred[0]} `}
-                {ingred.slice(1).map((ing, idx, array) => (
+                {ingred.slice(1).map((ing, idx) => (
                   <span key={idx} className="list-item-text">{`(${ing.join(
                     ' '
                   )})`}</span>
                 ))}
               </span>
-              {/* <div className="check-box"> */}
-              <Checkbox
-                disableRipple={true}
-                style={{ background: 'none' }}
-                // onClick={() => setLineThru(!lineThru)}
-                icon={<RadioButtonUncheckedIcon className="button-complete" />}
-                checkedIcon={<CheckCircleIcon className="button-complete" />}
-                name="checked"
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    disableRipple={true}
+                    style={{ background: 'none' }}
+                    icon={
+                      <RadioButtonUncheckedIcon className="button-complete" />
+                    }
+                    checkedIcon={
+                      <CheckCircleIcon className="button-complete" />
+                    }
+                    checked={!!checkedState[idx]}
+                    onChange={() => handleOnChange(idx)}
+                  />
+                }
               />
-              {/* </div> */}
             </div>
           ))}
         </div>
