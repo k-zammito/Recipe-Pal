@@ -2,17 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
-// import { Link } from 'react-router-dom';
 import Logo from '../../public/RECIPE PAL-logos_white.png';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import MenuIcon from '@material-ui/icons/Menu';
+
 
 const Navbar = ({ handleClick, isLoggedIn, userName }) => (
   <div className="navbar">
     <div className="navbar-wrap">
-      {/* <div className="nav-toggle">
-        <MenuIcon />
-      </div> */}
       <div className="navbar-img">
         <Link className="react-link" to="/home">
           <img src={Logo} className="navbar-logo" />

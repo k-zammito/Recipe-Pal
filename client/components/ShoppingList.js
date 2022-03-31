@@ -13,8 +13,6 @@ const ShoppingList = () => {
       state.mealPlans.find((mealPlan) => mealPlan.userId === userId) || {}
   );
 
-  const auth = useSelector((state) => state.auth);
-
   const ingredients = useSelector((state) =>
     state.ingredients.filter(
       (ing) =>
@@ -55,12 +53,11 @@ const ShoppingList = () => {
     } else {
       acc[ing.name] = [ing.amount * 1, ing.unit];
     }
-
     return acc;
   }, {});
 
   const ingEnt = Object.entries(ingReduce);
-  // console.log('entries', ingEnt);
+  console.log('entries', ingEnt);
   // console.log('ing names', uniqueIngNames);
 
   const toggleLineThru = (boolen) => {
@@ -85,6 +82,8 @@ const ShoppingList = () => {
     setCheckedState(updatedCheckedState);
   };
 
+  console.log('checked state', checkedState);
+
   useEffect(() => {
     setCheckedState(JSON.parse(window.localStorage.getItem('checkedState')));
   }, []);
@@ -93,6 +92,14 @@ const ShoppingList = () => {
     window.localStorage.setItem('checkedState', JSON.stringify(checkedState));
     // console.log('checked state', checkedState);
   }, [checkedState]);
+
+  const currIngred = (name) => {
+    return ingEnt.find((ing) => ing[0] === name);
+  };
+
+  // useEffect(() => {
+  //   ingEnt.forEach((ing) => ing.push(checkedState.shift()));
+  // }, [ingEnt]);
 
   return (
     <div className="list-container">
@@ -125,7 +132,7 @@ const ShoppingList = () => {
                     checkedIcon={
                       <CheckCircleIcon className="button-complete" />
                     }
-                    checked={!!checkedState[idx]}
+                    checked={!!currIngred(ingred[0])}
                     onChange={() => handleOnChange(idx)}
                   />
                 }

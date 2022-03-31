@@ -1,14 +1,8 @@
 import axios from 'axios';
 
-/**
- * ACTION TYPES
- */
 const FETCH_RECIPES = 'FETCH_RECIPES';
 const CLEAR_FETCHED_RECIPES = 'CLEAR_FETCHED_RECIPES';
 
-/**
- * ACTION CREATORS
- */
 const _fetchRecipes = (recipe) => {
   return {
     type: FETCH_RECIPES,
@@ -23,9 +17,6 @@ const _clearFetchedRecipes = (recipes) => {
   };
 };
 
-/**
- * THUNK CREATORS
- */
 export const fetchRecipes = (tag1, tag2, amount) => {
   return async (dispatch) => {
     const options = {
@@ -50,10 +41,6 @@ export const clearFetchedRecipes = (recipes) => {
     dispatch(_clearFetchedRecipes(clearedRecipes));
   };
 };
-
-/**
- * REDUCER
- */
 
 export const fetchedRecipes = (state = [], action) => {
   switch (action.type) {
