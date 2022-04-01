@@ -26,7 +26,7 @@ export const fetchRecipes = (tag1, tag2, amount) => {
       headers: {
         'x-rapidapi-host':
           'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
-        'x-rapidapi-key': 'fa42fec85fmsh86912e847dbf256p10c532jsnde7e4d22ff94',
+        'x-rapidapi-key': `${process.env.REACT_APP_API_KEY}`,
       },
     };
 

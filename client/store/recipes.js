@@ -1,17 +1,8 @@
 import axios from 'axios';
 
-
-/**
- * ACTION TYPES
- */
-
 const GET_RECIPES = 'GET_RECIPES';
 const CREATE_RECIPE = 'CREATE_RECIPE';
 const DELETE_RECIPE = 'DELETE_RECIPE';
-
-/**
- * ACTION CREATORS
- */
 
 const _getRecipes = (recipes) => {
   return {
@@ -33,9 +24,6 @@ const _deleteRecipe = (id) => {
     id,
   };
 };
-/**
- * THUNK CREATORS
- */
 
 export const getRecipes = () => {
   return async (dispatch) => {
@@ -57,10 +45,6 @@ export const deleteRecipe = (id) => {
     dispatch(_deleteRecipe(id));
   };
 };
-
-/**
- * REDUCER
- */
 
 export const recipes = (state = [], action) => {
   switch (action.type) {

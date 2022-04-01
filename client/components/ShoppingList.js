@@ -20,18 +20,11 @@ const ShoppingList = () => {
     )
   );
 
-  // console.log('USER MEALS', userMeals);
-
   const aisles = ingredients.map((ing) => ing.aisle);
   const uniqueAisles = [...new Set(aisles)];
 
   const ingNames = ingredients.map((ing) => ing.name);
   const uniqueIngNames = [...new Set(ingNames)].sort();
-  // console.log('UNIQUE INGREDIENTS', uniqueIngNames);
-  // console.log('ALL INGREDIENTS', ingredients);
-
-  // console.log(uniqueAisles);
-  // console.log('ING NAMES', ingNames);
 
   const measurementCombiner = (arr) => {
     const result = {};
@@ -57,8 +50,6 @@ const ShoppingList = () => {
   }, {});
 
   const ingEnt = Object.entries(ingReduce);
-  console.log('entries', ingEnt);
-  // console.log('ing names', uniqueIngNames);
 
   const toggleLineThru = (boolen) => {
     if (boolen) {
@@ -82,24 +73,17 @@ const ShoppingList = () => {
     setCheckedState(updatedCheckedState);
   };
 
-  console.log('checked state', checkedState);
-
   useEffect(() => {
     setCheckedState(JSON.parse(window.localStorage.getItem('checkedState')));
   }, []);
 
   useEffect(() => {
     window.localStorage.setItem('checkedState', JSON.stringify(checkedState));
-    // console.log('checked state', checkedState);
   }, [checkedState]);
 
   const currIngred = (name) => {
     return ingEnt.find((ing) => ing[0] === name);
   };
-
-  // useEffect(() => {
-  //   ingEnt.forEach((ing) => ing.push(checkedState.shift()));
-  // }, [ingEnt]);
 
   return (
     <div className="list-container">

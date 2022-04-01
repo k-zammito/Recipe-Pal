@@ -1,16 +1,10 @@
 import axios from 'axios';
 
-/**
- * ACTION TYPES
- */
 const GET_USERS = 'GET_USERS';
 const CREATE_USER = 'CREATE_USER';
 const DELETE_USER = 'DELETE_USER';
 const UPDATE_USER = 'UPDATE_USER';
 
-/**
- * ACTION CREATORS
- */
 const _getUsers = (users) => {
   return {
     type: GET_USERS,
@@ -39,9 +33,6 @@ const _updateUser = (user) => {
   };
 };
 
-/**
- * THUNK CREATORS
- */
 export const getUsers = () => {
   return async (dispatch) => {
     const users = (await axios.get('/api/users')).data;
@@ -69,10 +60,6 @@ export const updateUser = (user) => {
     dispatch(_updateUser(user));
   };
 };
-
-/**
- * REDUCER
- */
 
 export const users = (state = [], action) => {
   switch (action.type) {

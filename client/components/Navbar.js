@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import Logo from '../../public/RECIPE PAL-logos_white.png';
 
-
 const Navbar = ({ handleClick, isLoggedIn, userName }) => (
   <div className="navbar">
     <div className="navbar-wrap">
@@ -29,15 +28,16 @@ const Navbar = ({ handleClick, isLoggedIn, userName }) => (
               <span>
                 <Link to="/shoppinglist">Shopping List</Link>
               </span>
-              <a
-                href="#"
-                onClick={handleClick}
-                className="nav-logout"
-                style={{ alignSelf: 'center' }}
-              >
-                {/* <ExitToAppIcon className="nav-icon" /> */}
-                Logout
-              </a>
+              <span>
+                <a
+                  href="#"
+                  onClick={handleClick}
+                  className="nav-logout"
+                  style={{ alignSelf: 'center' }}
+                >
+                  Logout
+                </a>
+              </span>
             </div>
           </>
         ) : (
@@ -51,9 +51,6 @@ const Navbar = ({ handleClick, isLoggedIn, userName }) => (
   </div>
 );
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,

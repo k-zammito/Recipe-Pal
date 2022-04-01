@@ -1,17 +1,9 @@
 import axios from 'axios';
 
-/**
- * ACTION TYPES
- */
-
 const GET_INGREDIENTS = 'GET_INGREDIENTS';
 const CREATE_INGREDIENT = 'CREATE_INGREDIENT';
 const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 const UPDATE_INGREDIENT = 'UPDATE_INGREDIENT';
-
-/**
- * ACTION CREATORS
- */
 
 const _getingredients = (ingredients) => {
   return {
@@ -40,10 +32,6 @@ const _updateIngredient = (ingredient) => {
     ingredient,
   };
 };
-
-/**
- * THUNK CREATORS
- */
 
 export const getIngredients = () => {
   return async (dispatch) => {
@@ -75,10 +63,6 @@ export const updateIngredient = (ingredient) => {
     dispatch(_updateIngredient(ingredient));
   };
 };
-
-/**
- * REDUCER
- */
 
 export const ingredients = (state = [], action) => {
   switch (action.type) {

@@ -1,16 +1,8 @@
 import axios from 'axios';
 
-/**
- * ACTION TYPES
- */
-
 const GET_MEAL_PLANS = 'GET_MEAL_PLANS';
 const CREATE_MEAL_PLAN = 'CREATE_MEAL_PLAN';
 const EDIT_MEAL_PLAN = 'EDIT_MEAL_PLAN';
-
-/**
- * ACTION CREATORS
- */
 
 const _getMealPlans = (mealPlans) => {
   return {
@@ -27,9 +19,6 @@ const _createMealPlans = (mealPlan) => {
 };
 
 const _editMealPlan = (mealPlan) => ({ type: EDIT_MEAL_PLAN, mealPlan });
-/**
- * THUNK CREATORS
- */
 
 export const getMealPlans = () => {
   return async (dispatch) => {
@@ -52,10 +41,6 @@ export const editMealPlan = (mealPlan) => {
     dispatch(_editMealPlan(mealPlan));
   };
 };
-
-/**
- * REDUCER
- */
 
 export const mealPlans = (state = [], action) => {
   switch (action.type) {
