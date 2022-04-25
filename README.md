@@ -1,37 +1,41 @@
-# Stackathon
+# Recipe Pal
 
-## Logistics:
+Recipe Pal is a full stack app that generates recipes based on preferences and creates a shopping list.
 
-- Starts... Now!
-- Individual project
-- Presentations on Saturday 3/5/22
+Developer: Kenny Zammito
 
-## The Project:
+## Technologies
 
-- No requirements
-- Self-assigned idea
-- Should be ambitious
-- Must be able to be completed before presentations
-- Build something cool!
+Javascript, React, Redux, Express, Sequelize, PostgreSQL, Spoonacular API
 
-## Areas of Focus
+## Installation
 
-### Explore a new technology
+```js
+// Using PostgreSQL for database
+createdb stackathon
 
-- Libraries, tools, APIs
-- Maybe capstone related?
+// Install required libraries
+npm install
 
-### Build something useful/interesting for yourself
+// Seed database and start the application
+npm run start:dev:seed
+```
 
-- Use your background!
+# Screenshots
 
-#### Focus on the **wow** factor
+## Login
 
-#### The end goal is a prototype
+<img width="1423" alt="login" src="https://user-images.githubusercontent.com/85759741/165191803-d0f114f6-aa1b-4358-98c0-71875e161e74.png">
 
-## Presentations
+## Create Recipe
 
-- Work on your Elevator pitch, a 30 second to 1 minute description of your project
-- Have an idea of how to show off your project to a viewer
-- Will you be telling viewers what you have done?
-- Will you be showing viewers what you have done?
+<img width="1438" alt="create-recipe" src="https://user-images.githubusercontent.com/85759741/165191793-fe83ce49-9b5b-4bee-9209-44819cc92548.png">
+
+## Recipes Page
+
+<img width="1438" alt="recipes" src="https://user-images.githubusercontent.com/85759741/165191785-9a495ac5-34a6-42d7-9a35-eb4706e71581.png">
+
+## Grocery List
+
+<img width="1438" alt="grocery-list" src="https://user-images.githubusercontent.com/85759741/165191781-c80131f7-1897-4a08-be7a-3ce71909a78b.png">
+<img width="1438" alt="grocery-list-responsive" src="https://user-images.githubusercontent.com/85759741/165191777-c9929786-c1a3-4b5d-bcac-6a8a320a2c98.png">

@@ -80,7 +80,7 @@ const Recipes = () => {
                       type === 'dinner'
                   )
                   .pop(),
-                img: recipe.image === null ? defaultPhoto : recipe.image,
+                img: recipe.image ? recipe.image : defaultPhoto,
                 readyTime: recipe.readyInMinutes,
                 servings: recipe.servings,
                 url: recipe.sourceUrl,
